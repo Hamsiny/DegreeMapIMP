@@ -16,4 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private void onclick(){
         Toast.makeText(this, "You click me!", Toast.LENGTH_SHORT).show();
     }
+
+    private void onclick2(){
+        Toast.makeText(this, "Toast", Toast.LENGTH_SHORT).show();
+    }
 }

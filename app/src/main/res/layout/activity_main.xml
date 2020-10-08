@@ -8,11 +8,20 @@
 
 
     <Button
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:onClick="onclick"
         android:text="click" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button1"
+        android:layout_centerHorizontal="true"
+        android:text="button"
+        android:onClick="onclick2"/>
 
 
 </RelativeLayout>
