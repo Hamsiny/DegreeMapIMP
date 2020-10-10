@@ -18,14 +18,14 @@ public class Module {
     }
 
     public Module(String title, String description, String time, int credits, int level, Map<String, Boolean> pathway, Map<String, Boolean> prerequisite, Map<String, Boolean> corequisite) {
-        Title = title;
-        Description = description;
-        Time = time;
-        Credits = credits;
-        Level = level;
-        Pathway = pathway;
-        Prerequisite = prerequisite;
-        Corequisite = corequisite;
+        this.Title = title;
+        this.Description = description;
+        this.Time = time;
+        this.Credits = credits;
+        this.Level = level;
+        this.Pathway = pathway;
+        this.Prerequisite = prerequisite;
+        this.Corequisite = corequisite;
     }
 
     public String getTitle() {
@@ -33,7 +33,7 @@ public class Module {
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.Title = title;
     }
 
     public String getDescription() {
@@ -41,7 +41,7 @@ public class Module {
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.Description = description;
     }
 
     public String getTime() {
@@ -49,7 +49,7 @@ public class Module {
     }
 
     public void setTime(String time) {
-        Time = time;
+        this.Time = time;
     }
 
     public int getCredits() {
@@ -57,7 +57,7 @@ public class Module {
     }
 
     public void setCredits(int credits) {
-        Credits = credits;
+        this.Credits = credits;
     }
 
     public int getLevel() {
@@ -65,7 +65,7 @@ public class Module {
     }
 
     public void setLevel(int level) {
-        Level = level;
+        this.Level = level;
     }
 
     public Map<String, Boolean> getPathway() {
@@ -73,7 +73,7 @@ public class Module {
     }
 
     public void setPathway(Map<String, Boolean> pathway) {
-        Pathway = pathway;
+        this.Pathway = pathway;
     }
 
     public Map<String, Boolean> getPrerequisite() {
@@ -81,7 +81,7 @@ public class Module {
     }
 
     public void setPrerequisite(Map<String, Boolean> prerequisite) {
-        Prerequisite = prerequisite;
+        this.Prerequisite = prerequisite;
     }
 
     public Map<String, Boolean> getCorequisite() {
@@ -89,6 +89,6 @@ public class Module {
     }
 
     public void setCorequisite(Map<String, Boolean> corequisite) {
-        Corequisite = corequisite;
+        this.Corequisite = corequisite;
     }
 }
