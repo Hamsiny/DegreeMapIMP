@@ -3,4 +3,8 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="wintecYellow">#FFDD00</color>
+    <color name="wintecDarkGrey">#3A3A3A</color>
+    <color name="wintecLightGrey">#F0F0F0</color>
 </resources>
