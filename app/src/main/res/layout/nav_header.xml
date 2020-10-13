@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
+    android:layout_height="176dp"
     android:background="#acabda"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="bottom">
 
 
     <ImageView
+
         android:id="@+id/student_image"
         android:layout_width="96dp"
         android:layout_height="96dp"
@@ -15,11 +18,11 @@
         android:layout_marginStart="4dp"/>
 
     <TextView
+
         android:id="@+id/student_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_toRightOf="@id/student_image"
         android:text="Student Name"
         android:textSize="20sp" />
 
@@ -27,52 +30,13 @@
         android:id="@+id/student_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/student_name"
         android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
-        android:layout_toRightOf="@id/student_image"
         android:text="17459424" />
 
-    <ImageView
-        android:id="@+id/phone_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/student_id"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
-        android:layout_toRightOf="@id/student_image"
-        android:src="@drawable/ic_phone" />
-
-    <ImageView
-        android:id="@+id/email_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/student_phone"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
-        android:layout_toRightOf="@id/student_image"
-        android:src="@drawable/ic_email" />
 
 
-    <TextView
-        android:id="@+id/student_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/student_id"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="4dp"
-        android:layout_toRightOf="@id/phone_icon"
-        android:text="+(64) 027 123 1234" />
-
-    <TextView
-        android:id="@+id/student_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/student_phone"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="4dp"
-        android:layout_toRightOf="@id/email_icon"
-        android:text="wintec@student.wintec.ac.nz" />
 
 
-</RelativeLayout>
+
+</LinearLayout>
