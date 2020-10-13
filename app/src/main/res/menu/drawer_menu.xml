@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/software_stream"
+            android:icon="@drawable/ic_software"
+            android:iconTint="@color/wintecDarkGrey"
+            android:title="Software Engineering" />
+        <item
+            android:id="@+id/networking_stream"
+            android:icon="@drawable/ic_network"
+            android:iconTint="@color/wintecDarkGrey"
+            android:title="Network Engineering" />
+        <item
+            android:id="@+id/database_stream"
+            android:icon="@drawable/ic_database"
+            android:iconTint="@color/wintecDarkGrey"
+            android:title="Database Architecture" />
+        <item
+            android:id="@+id/web_stream"
+            android:icon="@drawable/ic_web"
+            android:iconTint="@color/wintecDarkGrey"
+            android:title="Web Development" />
+
+
+    </group>
+
+</menu>
