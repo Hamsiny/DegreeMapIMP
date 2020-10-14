@@ -8,11 +8,34 @@
     tools:context=".MainActivity">
 
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="TELL US WHO YOU ARE ?"
+        android:layout_above="@id/button_entrance_student"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:textSize="15sp"
+        android:textColor="@android:color/black"/>
+
+    <Button
+        android:id="@+id/button_entrance_student"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="STUDENT"
         android:layout_centerInParent="true"
-        android:text="Main activity" />
+        android:background="@color/wintecYellow"/>
+
+    <Button
+        android:layout_below="@id/button_entrance_student"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/button_entrance_manager"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="MANAGER"
+        android:layout_marginTop="8dp"
+        android:background="@color/wintecYellow"/>
 
 
 </RelativeLayout>
