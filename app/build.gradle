@@ -29,9 +29,15 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
 
     //Dependencies that are not default
+
+    def nav_version = "2.3.0"
+
     implementation 'com.google.firebase:firebase-database:16.0.4'
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation "androidx.cardview:cardview:1.0.0"
+
+    implementation "androidx.navigation:navigation-fragment:$nav_version"
+    implementation "androidx.navigation:navigation-ui:$nav_version"
     implementation 'com.google.android.material:material:1.2.1'
 
 

@@ -2,6 +2,7 @@ package com.randomone.androidmonsterc3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,19 +14,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String MANAGER_ENTRANCE_PASSWORD = "WinITDMP01";
-
     final Context context = this;
     private Button mStudentEntrance;
     private Button mManagerEntrance;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+    private void onclick(){
         mStudentEntrance = (Button) findViewById(R.id.button_entrance_student);
         mManagerEntrance = (Button) findViewById(R.id.button_entrance_manager);
 
@@ -91,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
     }
 
