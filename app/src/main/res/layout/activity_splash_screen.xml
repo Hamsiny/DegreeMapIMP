@@ -9,33 +9,33 @@
     tools:context=".SplashScreenActivity">
 
     <ImageView
-        android:layout_width="120sp"
-        android:layout_height="120sp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_above="@id/center_logo"
         android:layout_centerHorizontal="true"
         android:src="@drawable/winteclogo" />
 
     <ImageView
         android:id="@+id/center_logo"
-        android:layout_width="10sp"
-        android:layout_height="10sp"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:layout_centerInParent="true"
         android:src="@drawable/ic_androidy" />
 
     <ImageView
-        android:layout_width="150sp"
-        android:layout_height="150sp"
-        android:src="@drawable/androidmonsterlogo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"/>
+        android:src="@drawable/androidmonsterlogo" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="A one stop application for\n students and managers"
-        android:textSize="20sp"
         android:layout_below="@+id/center_logo"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:text="A one stop application for\n students and managers"
+        android:textSize="20sp" />
 
 
 </RelativeLayout>
