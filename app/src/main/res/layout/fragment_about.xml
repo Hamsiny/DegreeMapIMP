@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/client_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="Clients:"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/client_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/client_title"
+        android:layout_centerHorizontal="true"
+        android:text="Wintec CF.IT Degree Staff"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/app_version_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/client_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="App Version:"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/app_version_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/app_version_title"
+        android:layout_centerHorizontal="true"
+        android:text="Beta 0.1"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/api_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/app_version_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="API Level:"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/api_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/api_title"
+        android:layout_centerHorizontal="true"
+        android:text="Unable to find API level"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/os_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/api_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="Operating System:"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/os_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/os_title"
+        android:layout_centerHorizontal="true"
+        android:text="Android"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/developer_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/os_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="142dp"
+        android:text="Developed By:"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/developer_title"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/monster_logo" />
+
+
+</RelativeLayout>
