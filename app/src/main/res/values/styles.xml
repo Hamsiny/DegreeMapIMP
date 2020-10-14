@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/wintecYellow</item>
         <item name="colorPrimaryDark">@color/wintecDarkGrey</item>
@@ -10,6 +10,9 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="SplahScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
     </style>
 
 
