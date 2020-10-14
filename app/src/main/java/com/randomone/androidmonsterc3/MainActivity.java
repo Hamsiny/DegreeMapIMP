@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
-    private void onclick(){
         mStudentEntrance = (Button) findViewById(R.id.button_entrance_student);
         mManagerEntrance = (Button) findViewById(R.id.button_entrance_manager);
 
@@ -59,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                                         // get user input and check the password is right or not
                                         String inputPass = userInput.getText().toString();
                                         if (inputPass.equalsIgnoreCase(MANAGER_ENTRANCE_PASSWORD)){
-                                            Intent intent = new Intent(MainActivity.this, ManagerModulesActivity.class);
+                                            Intent intent = new Intent(MainActivity.this, ModuleActivity.class);
                                             startActivity(intent);
                                         }else{
                                             Toast.makeText(context, "Wrong password, please try again", Toast.LENGTH_SHORT).show();
@@ -81,24 +79,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        mManagerEntrance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ManagerModulesActivity.class);
-                startActivity(intent);
-            }
-        });
+            mManagerEntrance.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, ModuleActivity.class);
+                    startActivity(intent);
+                }
+            });
 
-        mStudentEntrance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, StudentModulesActivity.class);
-                startActivity(intent);
-            }
-        });
+            mStudentEntrance.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, ModuleActivity.class);  //todo pass Manager boolean to ModuleActivity to decide if we should use manager or student XML
+                    startActivity(intent);
+                }
+            });
 
+
+        }
 
     }
-
-
-}

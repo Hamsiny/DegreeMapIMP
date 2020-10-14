@@ -19,7 +19,7 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modules_manager); //TODO Implement manager/student distinct xml file eg... If user = manager then manager.xml
+        setContentView(R.layout.activity_modules_manager); //TODO Implement manager/student distinct xml file with Intent extra for manager eg... If user = manager then manager.xml
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);                   //replacing action bar with toolbar for navmenu
@@ -29,6 +29,9 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new CoreFragment()).commit();
     }
 
     @Override
