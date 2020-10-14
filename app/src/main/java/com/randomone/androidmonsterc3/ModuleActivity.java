@@ -29,6 +29,9 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new CoreFragment()).commit();
     }
 
     @Override
