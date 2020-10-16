@@ -25,6 +25,10 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
         setSupportActionBar(toolbar);                   //replacing action bar with toolbar for navmenu
 
         drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);        //used to call the onNavigationItemSelected Method
+        navigationView.setNavigationItemSelectedListener(this);
+
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -32,6 +36,7 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new CoreFragment()).commit();
+
     }
 
     @Override
@@ -48,7 +53,7 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
         switch (menuItem.getItemId()) {
             case R.id.nav_about:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new AboutFragment()).commit();
+                        new AboutFragment()).commit();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
