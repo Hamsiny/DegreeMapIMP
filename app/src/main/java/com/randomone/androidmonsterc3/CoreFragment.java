@@ -27,6 +27,7 @@ public class CoreFragment extends Fragment {
         mRecyclerView = rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        //mRecyclerView.setAdapter(); //todo make adapter
 
         return rootView;
 
