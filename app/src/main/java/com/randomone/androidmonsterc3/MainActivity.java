@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         mManagerEntrance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ManagerModulesActivity.class);
+                Intent intent = new Intent(MainActivity.this, ManagerEntranceActivity.class);
                 startActivity(intent);
             }
         });
