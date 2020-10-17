@@ -4,14 +4,14 @@ package com.randomone.androidmonsterc3;
 import java.util.Map;
 
 public class Module {
-    public String Title;
-    public String Description;
-    public String Time;
-    public int Credits;
-    public int Level;
-    public Map<String, Boolean> Pathway;
-    public Map<String, Boolean> Prerequisite;
-    public Map<String, Boolean> Corequisite;
+    private String Title;
+    private String Description;
+    private String Time;
+    private int Credits;
+    private int Level;
+    private Map<String, Boolean> Pathway;
+    private Map<String, Boolean> Prerequisite;
+    private Map<String, Boolean> Corequisite;
 
     public Module(){
 
