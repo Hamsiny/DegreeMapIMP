@@ -22,8 +22,8 @@ public class ModuleAdapter extends FirebaseRecyclerAdapter<Module, ModuleAdapter
     protected void onBindViewHolder(@NonNull ModuleAdapter.ModuleViewholder holder, int position, @NonNull Module model) {
         holder.name.setText(model.getTitle()); //todo find way to get code from object name
         holder.description.setText(model.getDescription());
-        holder.level.setText(model.getLevel());
-        holder.description.setText(model.getCredits());
+        holder.level.setText("Level " + model.getLevel());
+        holder.credits.setText(model.getCredits() + " Credits");
     }
 
     @NonNull

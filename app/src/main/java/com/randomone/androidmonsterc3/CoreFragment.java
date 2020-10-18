@@ -31,7 +31,7 @@ public class CoreFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("modules");
 
         FirebaseRecyclerOptions<Module> options
                 = new FirebaseRecyclerOptions.Builder<Module>()

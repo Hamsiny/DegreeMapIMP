@@ -14,7 +14,8 @@
             android:id="@+id/arrow_left_semester_select"
             android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:background="@drawable/ic_arrowleft" />
+            android:background="@drawable/ic_arrowleft"
+            android:backgroundTint="@color/wintecDarkGrey"/>
 
         <TextView
             android:id="@+id/text_view_semester_select"
@@ -30,7 +31,8 @@
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/ic_arrowright" />
+            android:background="@drawable/ic_arrowright"
+            android:backgroundTint="@color/wintecDarkGrey"/>
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView

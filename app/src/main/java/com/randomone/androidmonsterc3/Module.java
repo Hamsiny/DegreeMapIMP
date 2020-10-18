@@ -10,21 +10,21 @@ public class Module {
     private int Credits;
     private int Level;
     private Map<String, Boolean> Pathway;
-    private Map<String, Boolean> Prerequisite;
+    private Map<String, Boolean> Prerequisites;
     private Map<String, Boolean> Corequisite;
 
     public Module(){
 
     }
 
-    public Module(String title, String description, String time, int credits, int level, Map<String, Boolean> pathway, Map<String, Boolean> prerequisite, Map<String, Boolean> corequisite) {
+    public Module(String title, String description, String time, int credits, int level, Map<String, Boolean> pathway, Map<String, Boolean> prerequisites, Map<String, Boolean> corequisite) {
         this.Title = title;
         this.Description = description;
         this.Time = time;
         this.Credits = credits;
         this.Level = level;
         this.Pathway = pathway;
-        this.Prerequisite = prerequisite;
+        this.Prerequisites = prerequisites;
         this.Corequisite = corequisite;
     }
 
@@ -76,12 +76,12 @@ public class Module {
         this.Pathway = pathway;
     }
 
-    public Map<String, Boolean> getPrerequisite() {
-        return Prerequisite;
+    public Map<String, Boolean> getPrerequisites() {
+        return Prerequisites;
     }
 
-    public void setPrerequisite(Map<String, Boolean> prerequisite) {
-        this.Prerequisite = prerequisite;
+    public void setPrerequisites(Map<String, Boolean> prerequisites) {
+        this.Prerequisites = prerequisites;
     }
 
     public Map<String, Boolean> getCorequisite() {
