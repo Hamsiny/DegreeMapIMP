@@ -14,9 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 public class CoreFragment extends Fragment {
     private TextView mSemesterText;
@@ -24,9 +24,10 @@ public class CoreFragment extends Fragment {
     private Button mSemesterPrev;
 
     private RecyclerView mRecyclerView;
-    private DatabaseReference mDatabaseRef;
+    private FirebaseFirestore mDatabaseRef;
     private ModuleAdapter adapter;
-    FirebaseRecyclerOptions<Module> options;
+    FirestoreRecyclerOptions<Module> options;
+
 
     int sIndex = 0;
 
@@ -69,7 +70,7 @@ public class CoreFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("modules");
+        mDatabaseRef = FirebaseFirestore.getInstance();
 
         options = refreshRecycler();
         adapter = new ModuleAdapter(options);
@@ -83,6 +84,7 @@ public class CoreFragment extends Fragment {
             sIndex--;
             mSemesterText.setText(semesterText[sIndex]);
             refreshRecycler();
+            adapter.updateOptions(options);
         } else {
             Toast.makeText(getContext(), "Negative Semesters don't exist at Wintec!", Toast.LENGTH_SHORT).show();
         }
@@ -93,20 +95,22 @@ public class CoreFragment extends Fragment {
             sIndex++;
             mSemesterText.setText(semesterText[sIndex]);
             refreshRecycler();
+            adapter.updateOptions(options);
         } else {
             Toast.makeText(getContext(), "This is your final Semester!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public FirebaseRecyclerOptions<Module> refreshRecycler() {
+    public FirestoreRecyclerOptions<Module> refreshRecycler() {
 
-        if (sIndex == 0)
-            options = new FirebaseRecyclerOptions.Builder<Module>()
-                    .setQuery(mDatabaseRef.orderByChild("time").startAt("S1"), Module.class)
+        if (sIndex == 0){
+            options = new FirestoreRecyclerOptions.Builder<Module>()
+                    .setQuery(mDatabaseRef.collection("modules").whereArrayContains("pathway", "core").orderBy("time"), Module.class)
                     .build();
+    }
         else {
-            options = new FirebaseRecyclerOptions.Builder<Module>()
-                    .setQuery(mDatabaseRef.orderByChild("time").equalTo("S" + sIndex), Module.class)
+            options = new FirestoreRecyclerOptions.Builder<Module>()
+                    .setQuery(mDatabaseRef.collection("modules").whereArrayContains("pathway", "core").whereEqualTo("time", "S" + sIndex), Module.class)
                     .build();
         }
         return options;

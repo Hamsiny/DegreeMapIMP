@@ -11,16 +11,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-public class ModuleAdapter extends FirebaseRecyclerAdapter<Module, ModuleAdapter.ModuleViewholder> {
+public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapter.ModuleViewholder> {
 
-    public ModuleAdapter(@NonNull FirebaseRecyclerOptions<Module> options) {
+    public ModuleAdapter(@NonNull FirestoreRecyclerOptions<Module> options) {
         super(options);
     }
 
     @Override
     protected void onBindViewHolder(@NonNull ModuleAdapter.ModuleViewholder holder, int position, @NonNull Module model) {
-        holder.name.setText(model.getTitle()); //todo find way to get code from object name
+        holder.code.setText(model.getCode());
+        holder.name.setText(model.getTitle());
         holder.description.setText(model.getDescription());
         holder.level.setText("Level " + model.getLevel());
         holder.credits.setText(model.getCredits() + " Credits");

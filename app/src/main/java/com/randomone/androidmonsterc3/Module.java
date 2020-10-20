@@ -4,20 +4,23 @@ package com.randomone.androidmonsterc3;
 import java.util.Map;
 
 public class Module {
+
+    private String Code;
     private String Title;
     private String Description;
     private String Time;
     private int Credits;
     private int Level;
-    private Map<String, Boolean> Pathway;
-    private Map<String, Boolean> Prerequisites;
-    private Map<String, Boolean> Corequisite;
+    private String[] Pathway;
+    private String[] Prerequisites;
+    private String[] Corequisite;
 
     public Module(){
 
     }
 
-    public Module(String title, String description, String time, int credits, int level, Map<String, Boolean> pathway, Map<String, Boolean> prerequisites, Map<String, Boolean> corequisite) {
+    public Module(String code, String title, String description, String time, int credits, int level, String[] pathway, String[] prerequisites, String[] corequisite) {
+        this.Code = code;
         this.Title = title;
         this.Description = description;
         this.Time = time;
@@ -26,6 +29,14 @@ public class Module {
         this.Pathway = pathway;
         this.Prerequisites = prerequisites;
         this.Corequisite = corequisite;
+    }
+
+    public String getCode() {
+        return Code;
+    }
+
+    public void setCode(String code) {
+        Code = code;
     }
 
     public String getTitle() {
@@ -68,27 +79,27 @@ public class Module {
         this.Level = level;
     }
 
-    public Map<String, Boolean> getPathway() {
+    public String[] getPathway() {
         return Pathway;
     }
 
-    public void setPathway(Map<String, Boolean> pathway) {
+    public void setPathway(String[] pathway) {
         this.Pathway = pathway;
     }
 
-    public Map<String, Boolean> getPrerequisites() {
+    public String[] getPrerequisites() {
         return Prerequisites;
     }
 
-    public void setPrerequisites(Map<String, Boolean> prerequisites) {
+    public void setPrerequisites(String[] prerequisites) {
         this.Prerequisites = prerequisites;
     }
 
-    public Map<String, Boolean> getCorequisite() {
+    public String[] getCorequisite() {
         return Corequisite;
     }
 
-    public void setCorequisite(Map<String, Boolean> corequisite) {
+    public void setCorequisite(String[] corequisite) {
         this.Corequisite = corequisite;
     }
 }
