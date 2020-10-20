@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,12 +24,17 @@ public class MainActivity extends AppCompatActivity {
     final Context context = this;
     private Button mStudentEntrance;
     private Button mManagerEntrance;
+    Dialog dialog;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
 
 
         mStudentEntrance = (Button) findViewById(R.id.button_entrance_student);
@@ -98,4 +106,19 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.disclaimer_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button button = (Button) dialog.findViewById(R.id.btnOK);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
+}
