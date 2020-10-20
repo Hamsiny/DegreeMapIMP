@@ -76,6 +76,8 @@ public class CoreFragment extends Fragment {
         adapter = new ModuleAdapter(options);
         mRecyclerView.setAdapter(adapter);
 
+        
+
         return rootView;
     }
 

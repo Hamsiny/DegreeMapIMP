@@ -1,6 +1,7 @@
 package com.randomone.androidmonsterc3;
 
 
+import java.util.List;
 import java.util.Map;
 
 public class Module {
@@ -11,15 +12,15 @@ public class Module {
     private String Time;
     private int Credits;
     private int Level;
-    private String[] Pathway;
-    private String[] Prerequisites;
-    private String[] Corequisite;
+    private List<String> Pathway;
+    private List<String> Prerequisites;
+    private List<String> Corequisite;
 
     public Module(){
 
     }
 
-    public Module(String code, String title, String description, String time, int credits, int level, String[] pathway, String[] prerequisites, String[] corequisite) {
+    public Module(String code, String title, String description, String time, int credits, int level, List<String> pathway, List<String> prerequisites, List<String> corequisite) {
         this.Code = code;
         this.Title = title;
         this.Description = description;
@@ -79,27 +80,27 @@ public class Module {
         this.Level = level;
     }
 
-    public String[] getPathway() {
+    public List<String> getPathway() {
         return Pathway;
     }
 
-    public void setPathway(String[] pathway) {
+    public void setPathway(List<String> pathway) {
         this.Pathway = pathway;
     }
 
-    public String[] getPrerequisites() {
+    public List<String> getPrerequisites() {
         return Prerequisites;
     }
 
-    public void setPrerequisites(String[] prerequisites) {
+    public void setPrerequisites(List<String> prerequisites) {
         this.Prerequisites = prerequisites;
     }
 
-    public String[] getCorequisite() {
+    public List<String> getCorequisite() {
         return Corequisite;
     }
 
-    public void setCorequisite(String[] corequisite) {
+    public void setCorequisite(List<String> corequisite) {
         this.Corequisite = corequisite;
     }
 }
