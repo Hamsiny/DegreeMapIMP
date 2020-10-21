@@ -44,17 +44,6 @@
         tools:listitem="@layout/module_card" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_total_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        app:tint="@color/wintecYellow"
-        app:backgroundTint="@color/wintecDarkGrey"
-        android:layout_margin="32dp"
-        app:borderWidth="0dp"
 
-        android:src="@drawable/ic_add" />
 
 </RelativeLayout>
