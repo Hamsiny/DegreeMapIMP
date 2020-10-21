@@ -3,6 +3,8 @@ package com.randomone.androidmonsterc3;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -11,11 +13,20 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 
 public class ModuleActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
+
+    private FloatingActionButton fab;
+    private ExtendedFloatingActionButton efabStudent, efabModule;
+    private Animation fabOpen, fabClose;
+
+    Boolean manager = true;
+    Boolean isOpen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +40,12 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
         NavigationView navigationView = findViewById(R.id.nav_view);        //used to call the onNavigationItemSelected Method
         navigationView.setNavigationItemSelectedListener(this);
 
+        fab = findViewById(R.id.fab);
+        efabStudent = findViewById(R.id.fab1);
+        efabModule = findViewById(R.id.fab2);
+        fabClose = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
+        fabOpen = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -37,6 +54,39 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new CoreFragment()).commit();
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isOpen) {
+                    efabStudent.startAnimation(fabClose);
+                    efabModule.startAnimation(fabClose);
+                    efabStudent.setClickable(false);
+                    efabModule.setClickable(false);
+                    isOpen = false;
+                }
+                else{
+                    efabStudent.startAnimation(fabOpen);
+                    efabModule.startAnimation(fabOpen);
+                    efabStudent.setClickable(true);
+                    efabModule.setClickable(true);
+                    isOpen = true;
+                }
+            }
+        });
+
+        efabStudent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newModule();
+            }
+        });
+        efabModule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newStudent();
+            }
+        });
 
     }
 
@@ -61,6 +111,12 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
         return true;
     }
 
+    public void newModule(){
+        
+    }
 
+    public void newStudent(){
+        //todo: this lol
+    }
 }
 

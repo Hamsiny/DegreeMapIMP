@@ -4,11 +4,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="176dp"
+        android:clickable="false"
+        android:elevation="16dp"
+        android:focusable="true"
+        android:text="Add Module"
+        android:textColor="@color/wintecLightGrey"
+        android:visibility="invisible"
+        app:backgroundTint="@color/wintecDarkGrey"
+        app:icon="@drawable/ic_module"
+        app:iconGravity="end"
+        app:iconTint="@color/wintecLightGrey"
+        app:pressedTranslationZ="12dp" />
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="106dp"
+        android:clickable="false"
+        android:elevation="16dp"
+        android:focusable="true"
+        android:text="Add Student"
+        android:textColor="@color/wintecLightGrey"
+        android:visibility="invisible"
+        app:backgroundTint="@color/wintecDarkGrey"
+        app:icon="@drawable/ic_student"
+        app:iconGravity="end"
+        app:iconTint="@color/wintecLightGrey"
+        app:pressedTranslationZ="12dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:focusable="true"
+        android:src="@drawable/ic_add"
+        android:visibility="visible"
+        app:backgroundTint="@color/wintecDarkGrey"
+        app:pressedTranslationZ="12dp"
+        app:tint="@color/wintecLightGrey" />
 
 
 </RelativeLayout>
