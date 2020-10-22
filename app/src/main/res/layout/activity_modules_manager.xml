@@ -34,6 +34,7 @@
 
     </LinearLayout>
 
+    <include layout="@layout/expandable_fab"/>  <!--todo test if this interferes with navview selection-->
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -43,6 +44,6 @@
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_menu" />
 
-    <include layout="@layout/expandable_fab"/>
+
 </androidx.drawerlayout.widget.DrawerLayout>
 
