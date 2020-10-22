@@ -1,5 +1,6 @@
 package com.randomone.androidmonsterc3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,8 +42,8 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
         navigationView.setNavigationItemSelectedListener(this);
 
         fab = findViewById(R.id.fab);
-        efabStudent = findViewById(R.id.fab1);
-        efabModule = findViewById(R.id.fab2);
+        efabStudent = findViewById(R.id.fab2);
+        efabModule = findViewById(R.id.fab1);
         fabClose = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
         fabOpen = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
 
@@ -112,7 +113,8 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
     }
 
     public void newModule(){
-        
+        Intent intent = new Intent(this, ModuleCreatorActivity.class);
+        startActivity(intent);
     }
 
     public void newStudent(){

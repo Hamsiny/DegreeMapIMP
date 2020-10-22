@@ -13,6 +13,7 @@ public class ModuleCreatorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_module_creator);
 
         Spinner spinner = findViewById(R.id.time_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
