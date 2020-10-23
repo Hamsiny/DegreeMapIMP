@@ -2,6 +2,7 @@ package com.randomone.androidmonsterc3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,21 +14,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String MANAGER_ENTRANCE_PASSWORD = "WinITDMP01";
-
     final Context context = this;
     private Button mStudentEntrance;
     private Button mManagerEntrance;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         mStudentEntrance = (Button) findViewById(R.id.button_entrance_student);
         mManagerEntrance = (Button) findViewById(R.id.button_entrance_manager);
+
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setLogo(R.drawable.androidmonsterlogo);
+//        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         /*mManagerEntrance.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                                         // get user input and check the password is right or not
                                         String inputPass = userInput.getText().toString();
                                         if (inputPass.equalsIgnoreCase(MANAGER_ENTRANCE_PASSWORD)){
-                                            Intent intent = new Intent(MainActivity.this, ManagerModulesActivity.class);
+                                            Intent intent = new Intent(MainActivity.this, ModuleActivity.class);
                                             startActivity(intent);
                                         }else{
                                             Toast.makeText(context, "Wrong password, please try again", Toast.LENGTH_SHORT).show();
@@ -76,23 +83,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        mManagerEntrance.setOnClickListener(new View.OnClickListener() {
+
+
+        mStudentEntrance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ModuleActivity.class);  //todo pass Manager boolean to ModuleActivity to decide if we should use manager or student XML
+                startActivity(intent);
+            }
+        });
+
+        mManagerEntrance.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ManagerEntranceActivity.class);
                 startActivity(intent);
             }
-        });
+        }));
 
-        mStudentEntrance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, StudentModulesActivity.class);
-                startActivity(intent);
-            }
-        });
 
     }
-
 
 }
