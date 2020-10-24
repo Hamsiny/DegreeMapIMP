@@ -27,7 +27,7 @@
     </group>
 
 
-    <group android:id="@+id/fragmentselect" android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_about"
             android:title="About" />
