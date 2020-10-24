@@ -19,7 +19,7 @@
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/code_name"
+            android:id="@+id/code_input"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
@@ -37,7 +37,7 @@
         android:textSize="20dp" />
 
     <EditText
-        android:id="@+id/title_name"
+        android:id="@+id/title_input"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title_title"
@@ -48,14 +48,14 @@
         android:id="@+id/desc_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title_name"
+        android:layout_below="@+id/title_input"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
         android:text="Module Description:"
         android:textSize="20dp" />
 
     <EditText
-        android:id="@+id/desc_name"
+        android:id="@+id/desc_input"
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_below="@+id/desc_title"
@@ -67,7 +67,7 @@
         android:id="@+id/time_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/desc_name"
+        android:layout_below="@id/desc_input"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
         android:orientation="horizontal">
@@ -103,6 +103,7 @@
             android:textSize="20dp" />
 
         <EditText
+            android:id="@+id/credits_input"
             android:layout_width="42dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
@@ -118,6 +119,7 @@
             android:textSize="20dp" />
 
         <EditText
+            android:id="@+id/level_input"
             android:layout_width="42dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
@@ -143,30 +145,35 @@
             android:textSize="20dp" />
 
         <CheckBox
+            android:id="@+id/core_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Core"
             android:textSize="18dp" />
 
         <CheckBox
+            android:id="@+id/software_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Software Engineering"
             android:textSize="18dp" />
 
         <CheckBox
+            android:id="@+id/network_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Network Engineering"
             android:textSize="18dp" />
 
         <CheckBox
+            android:id="@+id/web_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Web Development"
             android:textSize="18dp" />
 
         <CheckBox
+            android:id="@+id/database_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Database Architecture"
@@ -189,6 +196,7 @@
             android:textSize="20dp"/>
 
         <EditText
+            android:id="@+id/prerequisite_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
@@ -211,6 +219,7 @@
             android:textSize="20dp"/>
 
         <EditText
+            android:id="@+id/corequisite_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
