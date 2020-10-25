@@ -1,5 +1,7 @@
 package com.randomone.androidmonsterc3;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,23 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class CoreFragment extends Fragment {
-    private TextView mSemesterText;
-    private Button mSemesterNext;
-    private Button mSemesterPrev;
-
-    private RecyclerView mRecyclerView;
-    private FirebaseFirestore mDatabaseRef;
-    private ModuleAdapter adapter;
     FirestoreRecyclerOptions<Module> options;
-
-
     int sIndex = 0;
-
     String[] semesterText = {
             "All Semesters",
             "Semester 1",
@@ -45,7 +36,12 @@ public class CoreFragment extends Fragment {
             "Semester 5",
             "Semester 6",
     };
-
+    private TextView mSemesterText;
+    private Button mSemesterNext;
+    private Button mSemesterPrev;
+    private RecyclerView mRecyclerView;
+    private FirebaseFirestore mDatabaseRef;
+    private ModuleAdapter adapter;
 
     @Nullable
     @Override
@@ -81,7 +77,6 @@ public class CoreFragment extends Fragment {
         adapter = new ModuleAdapter(options);
         mRecyclerView.setAdapter(adapter);
 
-        
 
         return rootView;
     }
@@ -110,19 +105,16 @@ public class CoreFragment extends Fragment {
 
     public FirestoreRecyclerOptions<Module> refreshRecycler() {
 
-        if (sIndex == 0){
+        if (sIndex == 0) {
             options = new FirestoreRecyclerOptions.Builder<Module>()
                     .setQuery(mDatabaseRef.collection("modules").whereArrayContains("pathway", "core").orderBy("time"), Module.class)
                     .build();
-    }
-        else {
+        } else {
             options = new FirestoreRecyclerOptions.Builder<Module>()
                     .setQuery(mDatabaseRef.collection("modules").whereArrayContains("pathway", "core").whereEqualTo("time", "S" + sIndex), Module.class)
                     .build();
         }
         return options;
-
-
     }
 
 
@@ -152,6 +144,11 @@ public class CoreFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
+                final int position = viewHolder.getAdapterPosition();
+                if (direction == ItemTouchHelper.LEFT) {
+                    deleteDialog(position);
+                }
+
             }
 
             @Override
@@ -169,5 +166,27 @@ public class CoreFragment extends Fragment {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
+    }
+
+    //method asks user for delete confirmation, and passes viewholder position to adapter if yes
+    private void deleteDialog(final int position){
+        new AlertDialog.Builder(getContext())
+                .setTitle("Delete Module?")
+                .setMessage("This will permanently remove this module from every device.")
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        adapter.deleteModule(position);
+                        Toast.makeText(getContext(), "Module Deleted", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getContext(), "Deletion Cancelled", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                });
+
     }
 }

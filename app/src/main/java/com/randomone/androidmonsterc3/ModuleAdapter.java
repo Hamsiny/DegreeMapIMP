@@ -47,4 +47,8 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
             credits = view.findViewById(R.id.module_credits);
         }
     }
+
+    public void deleteModule(int position) {
+        getSnapshots().getSnapshot(position).getReference().delete();
+    }
 }
