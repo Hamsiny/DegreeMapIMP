@@ -20,13 +20,38 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class CoreFragment extends Fragment {
+
     FirestoreRecyclerOptions<Module> options;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     int sIndex = 0;
+    private TextView mSemesterText;
+    private Button mSemesterNext;
+    private Button mSemesterPrev;
+    private RecyclerView mRecyclerView;
+    private FirebaseFirestore mDatabaseRef;
+    private ModuleAdapter adapter;
+
+    public static final String EXTRA_ID = "com.randomone.androidmonsterc3.EXTRA_ID";
+    public static final String EXTRA_CODE = "com.randomone.androidmonsterc3.EXTRA_CODE";
+    public static final String EXTRA_TITLE = "com.randomone.androidmonsterc3.EXTRA_TITLE";
+    public static final String EXTRA_DESCRIPTION = "com.randomone.androidmonsterc3.EXTRA_DESCRIPTION";
+    public static final String EXTRA_CREDIT = "com.randomone.androidmonsterc3.EXTRA_CREDIT";
+    public static final String EXTRA_LEVEL = "com.randomone.androidmonsterc3.EXTRA_LEVEL";
+    public static final String EXTRA_PATHWAY = "com.randomone.androidmonsterc3.EXTRA_PATHWAY";
+    public static final String EXTRA_TIME = "com.randomone.androidmonsterc3.EXTRA_TIME";
+    public static final String EXTRA_PREREQUISITE = "com.randomone.androidmonsterc3.EXTRA_PREREQUISITE";
+    public static final String EXTRA_COREQUISITE = "com.randomone.androidmonsterc3.EXTRA_COREQUISITE";
+
     String[] semesterText = {
             "All Semesters",
             "Semester 1",
@@ -36,12 +61,6 @@ public class CoreFragment extends Fragment {
             "Semester 5",
             "Semester 6",
     };
-    private TextView mSemesterText;
-    private Button mSemesterNext;
-    private Button mSemesterPrev;
-    private RecyclerView mRecyclerView;
-    private FirebaseFirestore mDatabaseRef;
-    private ModuleAdapter adapter;
 
     @Nullable
     @Override
@@ -92,6 +111,7 @@ public class CoreFragment extends Fragment {
         }
     }
 
+
     public void nextSemester(View view) {
         if (sIndex < 6) {
             sIndex++;
@@ -116,7 +136,6 @@ public class CoreFragment extends Fragment {
         }
         return options;
     }
-
 
     @Override
     public void onStart() {
@@ -146,14 +165,13 @@ public class CoreFragment extends Fragment {
 
                 final int position = viewHolder.getAdapterPosition();
 
-
                 if (direction == ItemTouchHelper.LEFT) {
                     deleteDialog(position);
-                    Toast.makeText(getContext(), "DELETE STUFF", Toast.LENGTH_SHORT).show();
                     adapter.notifyDataSetChanged();
                 }
                 if (direction == ItemTouchHelper.RIGHT) {
                     Toast.makeText(getContext(), "TEST TOAST", Toast.LENGTH_SHORT).show();
+                    editModule(position);
                     adapter.notifyDataSetChanged();
                 }
 
@@ -167,7 +185,7 @@ public class CoreFragment extends Fragment {
                         .addSwipeLeftBackgroundColor(ContextCompat.getColor(getContext(), R.color.deleteRed))
                         .addSwipeLeftLabel("DELETE")
                         .create().decorate();
-               
+
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             }
         };
@@ -195,6 +213,23 @@ public class CoreFragment extends Fragment {
                         return;
                     }
                 }).show();
+    }
+
+
+    //creating a document snapshot with the provided reference ID, then getting the data to use in EXTRA's for activity intent.
+    private void editModule(final int position) {
+        String id = adapter.getSnapshots().getSnapshot(position).getReference().getId();
+        DocumentReference documentRef = db.collection("modules").document(id);
+        documentRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot moduleDoc = task.getResult();
+                if (moduleDoc.exists()){
+                    Toast.makeText(getContext(), "DOCUMENT WORKING", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
 
     }
 }

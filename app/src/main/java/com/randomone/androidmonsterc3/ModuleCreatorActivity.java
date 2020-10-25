@@ -15,8 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.common.util.ArrayUtils;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,8 +31,8 @@ public class ModuleCreatorActivity extends AppCompatActivity {
     private CheckBox coreBox, softwareBox, networkBox, webBox, databaseBox;
     private String time;
     private List<String> pathway = new ArrayList<String>();
-    private String[] prerequisites;
-    private String[] corequisites;
+    private List<String> prerequisites = new ArrayList<String>();
+    private List<String> corequisites = new ArrayList<String>();
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String TAG = "ModuleCreatorActivity";
@@ -129,14 +131,18 @@ public class ModuleCreatorActivity extends AppCompatActivity {
             pathway.add("web");
         }
 
+
         String raw = prerequisiteInput.getText().toString();
         if (raw != null && !raw.trim().isEmpty()){
-            prerequisites = raw.split("\\s*,\\s*");
+           String[] preprerequisites = raw.split("\\s*,\\s*");
+           prerequisites = Arrays.asList(preprerequisites);
+
         }
 
         raw = corequisiteInput.getText().toString();
         if (raw != null && !raw.trim().isEmpty()) {
-            corequisites = raw.split("\\s*,\\s*");
+            String[] precorequisites = raw.split("\\s*,\\s*");
+            corequisites = Arrays.asList(precorequisites);
         }
 
         Module module = new Module(
@@ -147,8 +153,8 @@ public class ModuleCreatorActivity extends AppCompatActivity {
                 Integer.parseInt(creditsInput.getText().toString()),
                 Integer.parseInt(levelInput.getText().toString()),
                 pathway,
-                Arrays.asList(prerequisites),
-                Arrays.asList(corequisites));
+                prerequisites,
+                corequisites);
 
         Log.d(TAG, module.toString());
 
