@@ -211,7 +211,8 @@ public class CoreFragment extends Fragment {
 
     //creating a document snapshot with the provided reference ID, then getting the data to use in EXTRA's for activity intent.
     private void editModule(final int position) {
-        //data to pass
+
+        //document reference
         final String id = adapter.getSnapshots().getSnapshot(position).getReference().getId();
 
         DocumentReference documentRef = db.collection("modules").document(id);
@@ -221,14 +222,15 @@ public class CoreFragment extends Fragment {
                 DocumentSnapshot moduleDoc = task.getResult();
                 if (moduleDoc.exists()){
 
+                    //savng snapshot data to extras
                     Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
                     String code = (String) moduleDoc.get("code");
                     String title = (String) moduleDoc.get("title");
                     String description = (String) moduleDoc.get("description");
                     long creditLong = (Long) moduleDoc.get("credits");
-                    int credits = (int) creditLong;
+                    String credits = Long.toString(creditLong);
                     long levelLong = (Long) moduleDoc.get("level");
-                    int level = (int) levelLong;
+                    String level = Long.toString(levelLong);            //format is long but won't convert in a single line for some reason, so i have to define it as a long first
                     String time = (String) moduleDoc.get("time");
                     List<String> pathway = new ArrayList<String>();
                     pathway = (ArrayList<String>) moduleDoc.get("pathway");
@@ -237,8 +239,7 @@ public class CoreFragment extends Fragment {
                     List<String> corequisites = new ArrayList<String>();
                     corequisites = (ArrayList<String>) moduleDoc.get("corequisites");
 
-
-                    Toast.makeText(getContext(), "Level: "+ level +", LevelLong:" + levelLong, Toast.LENGTH_SHORT).show(); //todo remove this after figuring out why
+                    //Sending Snapshot data as extra
                     Intent intent = new Intent(getContext(), ModuleCreatorActivity.class);
                     intent.putExtra(ModuleCreatorActivity.EXTRA_ID, id);
                     intent.putExtra(ModuleCreatorActivity.EXTRA_CODE, code);
@@ -250,7 +251,7 @@ public class CoreFragment extends Fragment {
                     intent.putStringArrayListExtra(ModuleCreatorActivity.EXTRA_PATHWAY, (ArrayList<String>) pathway);
                     intent.putStringArrayListExtra(ModuleCreatorActivity.EXTRA_PREREQUISITE, (ArrayList<String>) prerequisites);
                     intent.putStringArrayListExtra(ModuleCreatorActivity.EXTRA_COREQUISITE, (ArrayList<String>) corequisites);
-                    startActivity(intent); //todo: figure out why level and credits aren't working
+                    startActivity(intent);
 
                 }
                 else {

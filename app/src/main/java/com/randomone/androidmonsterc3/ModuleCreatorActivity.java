@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -105,9 +106,41 @@ public class ModuleCreatorActivity extends AppCompatActivity {
                     break;
             }
 
+            loop: for (String pathwayItem : intent.getStringArrayListExtra(EXTRA_PATHWAY)) {
+                switch (pathwayItem){
+                    case "core":
+                        coreBox.setChecked(true);
+                        break loop;
+                    case "software":
+                        softwareBox.setChecked(true);
+                        break;
+                    case "networking":
+                        networkBox.setChecked(true);
+                        break;
+                    case "database":
+                        databaseBox.setChecked(true);
+                        break;
+                    case "web":
+                        webBox.setChecked(true);
+                        break;
+                }
+            }
 
-        }
-
+            ArrayList<String> prerequisiteCheck = intent.getStringArrayListExtra(EXTRA_PREREQUISITE);
+            ArrayList<String> corequisiteCheck = intent.getStringArrayListExtra(EXTRA_COREQUISITE);
+            if ( prerequisiteCheck != null ) {
+                if (!prerequisiteCheck.isEmpty()) {
+                    String prerequisiteLine = String.join(", ", prerequisiteCheck);
+                    prerequisiteInput.setText(prerequisiteLine);
+                }
+            }
+            if ( corequisiteCheck != null ) {
+                if (!corequisiteCheck.isEmpty()) {
+                    String corequisiteLine = String.join(", ", corequisiteCheck);
+                    corequisiteInput.setText(corequisiteLine);
+                }
+            }
+       }
     }
 
     @Override
@@ -200,9 +233,13 @@ public class ModuleCreatorActivity extends AppCompatActivity {
                 prerequisites,
                 corequisites);
 
-        Log.d(TAG, module.toString());
-
-        db.collection("modules").add(module);
+        Intent intent = getIntent();
+        if (intent.hasExtra(EXTRA_ID)) {
+            db.collection("modules").document(intent.getStringExtra(EXTRA_ID)).set(module);
+        }
+        else {
+            db.collection("modules").add(module);
+        }
         finish();
     }
 }
