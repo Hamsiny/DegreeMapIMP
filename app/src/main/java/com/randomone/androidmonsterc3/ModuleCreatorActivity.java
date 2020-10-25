@@ -1,5 +1,6 @@
 package com.randomone.androidmonsterc3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -26,6 +27,17 @@ import java.util.List;
 import java.util.Map;
 
 public class ModuleCreatorActivity extends AppCompatActivity {
+    public static final String EXTRA_ID = "com.randomone.androidmonsterc3.EXTRA_ID";
+    public static final String EXTRA_CODE = "com.randomone.androidmonsterc3.EXTRA_CODE";
+    public static final String EXTRA_TITLE = "com.randomone.androidmonsterc3.EXTRA_TITLE";
+    public static final String EXTRA_DESCRIPTION = "com.randomone.androidmonsterc3.EXTRA_DESCRIPTION";
+    public static final String EXTRA_CREDIT = "com.randomone.androidmonsterc3.EXTRA_CREDIT";
+    public static final String EXTRA_LEVEL = "com.randomone.androidmonsterc3.EXTRA_LEVEL";
+    public static final String EXTRA_PATHWAY = "com.randomone.androidmonsterc3.EXTRA_PATHWAY";
+    public static final String EXTRA_TIME = "com.randomone.androidmonsterc3.EXTRA_TIME";
+    public static final String EXTRA_PREREQUISITE = "com.randomone.androidmonsterc3.EXTRA_PREREQUISITE";
+    public static final String EXTRA_COREQUISITE = "com.randomone.androidmonsterc3.EXTRA_COREQUISITE";
+
     private EditText codeInput, titleInput, descriptionInput, creditsInput, levelInput, prerequisiteInput, corequisiteInput;
     private Spinner semesterInput;
     private CheckBox coreBox, softwareBox, networkBox, webBox, databaseBox;
@@ -56,13 +68,45 @@ public class ModuleCreatorActivity extends AppCompatActivity {
         webBox = findViewById(R.id.web_box);
         databaseBox = findViewById(R.id.database_box);
 
-
-
         //making semester spinner functional
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
                 (this, R.array.time_picker_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         semesterInput.setAdapter(adapter);
+
+        Intent intent = getIntent();
+        if(intent.hasExtra(EXTRA_ID)) {
+            setTitle("Edit Module");
+            codeInput.setText(intent.getStringExtra(EXTRA_CODE));
+            titleInput.setText(intent.getStringExtra(EXTRA_TITLE));
+            descriptionInput.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
+            creditsInput.setText(intent.getStringExtra(EXTRA_CREDIT));
+            levelInput.setText(intent.getStringExtra(EXTRA_LEVEL));
+
+            //setting spinner based on time
+            switch (intent.getStringExtra(EXTRA_TIME)){
+                case "S1":
+                    semesterInput.setSelection(0);
+                    break;
+                case "S2":
+                    semesterInput.setSelection(1);
+                    break;
+                case "S3":
+                    semesterInput.setSelection(2);
+                    break;
+                case "S4":
+                    semesterInput.setSelection(3);
+                    break;
+                case "S5":
+                    semesterInput.setSelection(4);
+                    break;
+                case "S6":
+                    semesterInput.setSelection(5);
+                    break;
+            }
+
+
+        }
 
     }
 

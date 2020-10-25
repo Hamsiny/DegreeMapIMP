@@ -2,6 +2,7 @@ package com.randomone.androidmonsterc3;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,6 +27,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class CoreFragment extends Fragment {
@@ -41,16 +45,6 @@ public class CoreFragment extends Fragment {
     private FirebaseFirestore mDatabaseRef;
     private ModuleAdapter adapter;
 
-    public static final String EXTRA_ID = "com.randomone.androidmonsterc3.EXTRA_ID";
-    public static final String EXTRA_CODE = "com.randomone.androidmonsterc3.EXTRA_CODE";
-    public static final String EXTRA_TITLE = "com.randomone.androidmonsterc3.EXTRA_TITLE";
-    public static final String EXTRA_DESCRIPTION = "com.randomone.androidmonsterc3.EXTRA_DESCRIPTION";
-    public static final String EXTRA_CREDIT = "com.randomone.androidmonsterc3.EXTRA_CREDIT";
-    public static final String EXTRA_LEVEL = "com.randomone.androidmonsterc3.EXTRA_LEVEL";
-    public static final String EXTRA_PATHWAY = "com.randomone.androidmonsterc3.EXTRA_PATHWAY";
-    public static final String EXTRA_TIME = "com.randomone.androidmonsterc3.EXTRA_TIME";
-    public static final String EXTRA_PREREQUISITE = "com.randomone.androidmonsterc3.EXTRA_PREREQUISITE";
-    public static final String EXTRA_COREQUISITE = "com.randomone.androidmonsterc3.EXTRA_COREQUISITE";
 
     String[] semesterText = {
             "All Semesters",
@@ -170,7 +164,6 @@ public class CoreFragment extends Fragment {
                     adapter.notifyDataSetChanged();
                 }
                 if (direction == ItemTouchHelper.RIGHT) {
-                    Toast.makeText(getContext(), "TEST TOAST", Toast.LENGTH_SHORT).show();
                     editModule(position);
                     adapter.notifyDataSetChanged();
                 }
@@ -218,18 +211,52 @@ public class CoreFragment extends Fragment {
 
     //creating a document snapshot with the provided reference ID, then getting the data to use in EXTRA's for activity intent.
     private void editModule(final int position) {
-        String id = adapter.getSnapshots().getSnapshot(position).getReference().getId();
+        //data to pass
+        final String id = adapter.getSnapshots().getSnapshot(position).getReference().getId();
+
         DocumentReference documentRef = db.collection("modules").document(id);
         documentRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot moduleDoc = task.getResult();
                 if (moduleDoc.exists()){
-                    Toast.makeText(getContext(), "DOCUMENT WORKING", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
+                    String code = (String) moduleDoc.get("code");
+                    String title = (String) moduleDoc.get("title");
+                    String description = (String) moduleDoc.get("description");
+                    long creditLong = (Long) moduleDoc.get("credits");
+                    int credits = (int) creditLong;
+                    long levelLong = (Long) moduleDoc.get("level");
+                    int level = (int) levelLong;
+                    String time = (String) moduleDoc.get("time");
+                    List<String> pathway = new ArrayList<String>();
+                    pathway = (ArrayList<String>) moduleDoc.get("pathway");
+                    List<String> prerequisites = new ArrayList<String>();
+                    prerequisites = (ArrayList<String>) moduleDoc.get("prerequisites");
+                    List<String> corequisites = new ArrayList<String>();
+                    corequisites = (ArrayList<String>) moduleDoc.get("corequisites");
+
+
+                    Toast.makeText(getContext(), "Level: "+ level +", LevelLong:" + levelLong, Toast.LENGTH_SHORT).show(); //todo remove this after figuring out why
+                    Intent intent = new Intent(getContext(), ModuleCreatorActivity.class);
+                    intent.putExtra(ModuleCreatorActivity.EXTRA_ID, id);
+                    intent.putExtra(ModuleCreatorActivity.EXTRA_CODE, code);
+                    intent.putExtra(ModuleCreatorActivity.EXTRA_TITLE, title);
+                    intent.putExtra(ModuleCreatorActivity.EXTRA_DESCRIPTION, description);
+                    intent.putExtra(ModuleCreatorActivity.EXTRA_CREDIT, credits);
+                    intent.putExtra(ModuleCreatorActivity.EXTRA_LEVEL, level);
+                    intent.putExtra(ModuleCreatorActivity.EXTRA_TIME, time);
+                    intent.putStringArrayListExtra(ModuleCreatorActivity.EXTRA_PATHWAY, (ArrayList<String>) pathway);
+                    intent.putStringArrayListExtra(ModuleCreatorActivity.EXTRA_PREREQUISITE, (ArrayList<String>) prerequisites);
+                    intent.putStringArrayListExtra(ModuleCreatorActivity.EXTRA_COREQUISITE, (ArrayList<String>) corequisites);
+                    startActivity(intent); //todo: figure out why level and credits aren't working
+
+                }
+                else {
+                    Toast.makeText(getContext(), "ERROR: DOCUMENT_ID_NOT_RETRIEVED", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-
     }
 }
