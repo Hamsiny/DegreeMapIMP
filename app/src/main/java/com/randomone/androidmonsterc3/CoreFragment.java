@@ -145,21 +145,29 @@ public class CoreFragment extends Fragment {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
                 final int position = viewHolder.getAdapterPosition();
+
+
                 if (direction == ItemTouchHelper.LEFT) {
                     deleteDialog(position);
+                    Toast.makeText(getContext(), "DELETE STUFF", Toast.LENGTH_SHORT).show();
+                    adapter.notifyDataSetChanged();
+                }
+                if (direction == ItemTouchHelper.RIGHT) {
+                    Toast.makeText(getContext(), "TEST TOAST", Toast.LENGTH_SHORT).show();
+                    adapter.notifyDataSetChanged();
                 }
 
             }
 
             @Override
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+               new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
                         .addSwipeRightBackgroundColor(ContextCompat.getColor(getContext(), R.color.editGreen))
                         .addSwipeRightLabel("EDIT")
                         .addSwipeLeftBackgroundColor(ContextCompat.getColor(getContext(), R.color.deleteRed))
                         .addSwipeLeftLabel("DELETE")
                         .create().decorate();
-
+               
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             }
         };
@@ -186,7 +194,7 @@ public class CoreFragment extends Fragment {
                         Toast.makeText(getContext(), "Deletion Cancelled", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                });
+                }).show();
 
     }
 }
