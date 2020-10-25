@@ -107,6 +107,22 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AboutFragment()).commit();
                 break;
+            case R.id.software_stream:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new SoftwareFragment()).commit();
+                break;
+            case R.id.database_stream:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new DatabaseFragment()).commit();
+                break;
+            case R.id.networking_stream:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new NetworkingFragment()).commit();
+                break;
+            case R.id.web_stream:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new WebFragment()).commit();
+                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
