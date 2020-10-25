@@ -26,6 +26,7 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
         holder.description.setText(model.getDescription());
         holder.level.setText("Level " + model.getLevel());
         holder.credits.setText(model.getCredits() + " Credits");
+
     }
 
     @NonNull
@@ -46,5 +47,9 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
             level = view.findViewById(R.id.module_level);
             credits = view.findViewById(R.id.module_credits);
         }
+    }
+
+    public void deleteModule(int position) {
+        getSnapshots().getSnapshot(position).getReference().delete();
     }
 }

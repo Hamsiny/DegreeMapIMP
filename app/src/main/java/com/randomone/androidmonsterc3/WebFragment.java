@@ -32,8 +32,7 @@ import java.util.List;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
-public class CoreFragment extends Fragment {
-
+public class WebFragment extends Fragment {
     FirestoreRecyclerOptions<Module> options;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -90,7 +89,7 @@ public class CoreFragment extends Fragment {
         adapter = new ModuleAdapter(options);
         mRecyclerView.setAdapter(adapter);
 
-        getActivity().setTitle("Core Stream");
+        getActivity().setTitle("Web Stream");
 
         return rootView;
     }
@@ -122,11 +121,11 @@ public class CoreFragment extends Fragment {
 
         if (sIndex == 0) {
             options = new FirestoreRecyclerOptions.Builder<Module>()
-                    .setQuery(mDatabaseRef.collection("modules").whereArrayContains("pathway", "core").orderBy("time"), Module.class)
+                    .setQuery(mDatabaseRef.collection("modules").whereArrayContains("pathway", "web").orderBy("time"), Module.class)
                     .build();
         } else {
             options = new FirestoreRecyclerOptions.Builder<Module>()
-                    .setQuery(mDatabaseRef.collection("modules").whereArrayContains("pathway", "core").whereEqualTo("time", "S" + sIndex), Module.class)
+                    .setQuery(mDatabaseRef.collection("modules").whereArrayContains("pathway", "web").whereEqualTo("time", "S" + sIndex), Module.class)
                     .build();
         }
         return options;
@@ -173,7 +172,7 @@ public class CoreFragment extends Fragment {
 
             @Override
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-               new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
                         .addSwipeRightBackgroundColor(ContextCompat.getColor(getContext(), R.color.editGreen))
                         .addSwipeRightLabel("EDIT")
                         .addSwipeLeftBackgroundColor(ContextCompat.getColor(getContext(), R.color.deleteRed))

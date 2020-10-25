@@ -1,5 +1,6 @@
 package com.randomone.androidmonsterc3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,13 +11,16 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.common.util.ArrayUtils;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -24,13 +28,24 @@ import java.util.List;
 import java.util.Map;
 
 public class ModuleCreatorActivity extends AppCompatActivity {
+    public static final String EXTRA_ID = "com.randomone.androidmonsterc3.EXTRA_ID";
+    public static final String EXTRA_CODE = "com.randomone.androidmonsterc3.EXTRA_CODE";
+    public static final String EXTRA_TITLE = "com.randomone.androidmonsterc3.EXTRA_TITLE";
+    public static final String EXTRA_DESCRIPTION = "com.randomone.androidmonsterc3.EXTRA_DESCRIPTION";
+    public static final String EXTRA_CREDIT = "com.randomone.androidmonsterc3.EXTRA_CREDIT";
+    public static final String EXTRA_LEVEL = "com.randomone.androidmonsterc3.EXTRA_LEVEL";
+    public static final String EXTRA_PATHWAY = "com.randomone.androidmonsterc3.EXTRA_PATHWAY";
+    public static final String EXTRA_TIME = "com.randomone.androidmonsterc3.EXTRA_TIME";
+    public static final String EXTRA_PREREQUISITE = "com.randomone.androidmonsterc3.EXTRA_PREREQUISITE";
+    public static final String EXTRA_COREQUISITE = "com.randomone.androidmonsterc3.EXTRA_COREQUISITE";
+
     private EditText codeInput, titleInput, descriptionInput, creditsInput, levelInput, prerequisiteInput, corequisiteInput;
     private Spinner semesterInput;
     private CheckBox coreBox, softwareBox, networkBox, webBox, databaseBox;
     private String time;
     private List<String> pathway = new ArrayList<String>();
-    private String[] prerequisites;
-    private String[] corequisites;
+    private List<String> prerequisites = new ArrayList<String>();
+    private List<String> corequisites = new ArrayList<String>();
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String TAG = "ModuleCreatorActivity";
@@ -54,14 +69,78 @@ public class ModuleCreatorActivity extends AppCompatActivity {
         webBox = findViewById(R.id.web_box);
         databaseBox = findViewById(R.id.database_box);
 
-
-
         //making semester spinner functional
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
                 (this, R.array.time_picker_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         semesterInput.setAdapter(adapter);
 
+        Intent intent = getIntent();
+        if(intent.hasExtra(EXTRA_ID)) {
+            setTitle("Edit Module");
+            codeInput.setText(intent.getStringExtra(EXTRA_CODE));
+            titleInput.setText(intent.getStringExtra(EXTRA_TITLE));
+            descriptionInput.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
+            creditsInput.setText(intent.getStringExtra(EXTRA_CREDIT));
+            levelInput.setText(intent.getStringExtra(EXTRA_LEVEL));
+
+            //setting spinner based on time
+            switch (intent.getStringExtra(EXTRA_TIME)){
+                case "S1":
+                    semesterInput.setSelection(0);
+                    break;
+                case "S2":
+                    semesterInput.setSelection(1);
+                    break;
+                case "S3":
+                    semesterInput.setSelection(2);
+                    break;
+                case "S4":
+                    semesterInput.setSelection(3);
+                    break;
+                case "S5":
+                    semesterInput.setSelection(4);
+                    break;
+                case "S6":
+                    semesterInput.setSelection(5);
+                    break;
+            }
+
+            loop: for (String pathwayItem : intent.getStringArrayListExtra(EXTRA_PATHWAY)) {
+                switch (pathwayItem){
+                    case "core":
+                        coreBox.setChecked(true);
+                        break loop;
+                    case "software":
+                        softwareBox.setChecked(true);
+                        break;
+                    case "networking":
+                        networkBox.setChecked(true);
+                        break;
+                    case "database":
+                        databaseBox.setChecked(true);
+                        break;
+                    case "web":
+                        webBox.setChecked(true);
+                        break;
+                }
+            }
+
+            ArrayList<String> prerequisiteCheck = intent.getStringArrayListExtra(EXTRA_PREREQUISITE);
+            ArrayList<String> corequisiteCheck = intent.getStringArrayListExtra(EXTRA_COREQUISITE);
+            if ( prerequisiteCheck != null ) {
+                if (!prerequisiteCheck.isEmpty()) {
+                    String prerequisiteLine = String.join(", ", prerequisiteCheck);
+                    prerequisiteInput.setText(prerequisiteLine);
+                }
+            }
+            if ( corequisiteCheck != null ) {
+                if (!corequisiteCheck.isEmpty()) {
+                    String corequisiteLine = String.join(", ", corequisiteCheck);
+                    corequisiteInput.setText(corequisiteLine);
+                }
+            }
+       }
     }
 
     @Override
@@ -129,14 +208,18 @@ public class ModuleCreatorActivity extends AppCompatActivity {
             pathway.add("web");
         }
 
+
         String raw = prerequisiteInput.getText().toString();
         if (raw != null && !raw.trim().isEmpty()){
-            prerequisites = raw.split("\\s*,\\s*");
+           String[] preprerequisites = raw.split("\\s*,\\s*");
+           prerequisites = Arrays.asList(preprerequisites);
+
         }
 
         raw = corequisiteInput.getText().toString();
         if (raw != null && !raw.trim().isEmpty()) {
-            corequisites = raw.split("\\s*,\\s*");
+            String[] precorequisites = raw.split("\\s*,\\s*");
+            corequisites = Arrays.asList(precorequisites);
         }
 
         Module module = new Module(
@@ -147,12 +230,16 @@ public class ModuleCreatorActivity extends AppCompatActivity {
                 Integer.parseInt(creditsInput.getText().toString()),
                 Integer.parseInt(levelInput.getText().toString()),
                 pathway,
-                Arrays.asList(prerequisites),
-                Arrays.asList(corequisites));
+                prerequisites,
+                corequisites);
 
-        Log.d(TAG, module.toString());
-
-        db.collection("modules").add(module);
+        Intent intent = getIntent();
+        if (intent.hasExtra(EXTRA_ID)) {
+            db.collection("modules").document(intent.getStringExtra(EXTRA_ID)).set(module);
+        }
+        else {
+            db.collection("modules").add(module);
+        }
         finish();
     }
 }

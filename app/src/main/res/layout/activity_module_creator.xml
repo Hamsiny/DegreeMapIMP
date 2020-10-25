@@ -23,7 +23,8 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:hint="e.g. COMP501" />
+            android:hint="e.g. COMP501"
+            android:inputType="textCapCharacters" />
     </LinearLayout>
 
     <TextView
@@ -42,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/title_title"
         android:layout_centerHorizontal="true"
+        android:inputType="textCapWords"
         android:hint="e.g. IT Operations" />
 
     <TextView
@@ -57,6 +59,7 @@
     <EditText
         android:id="@+id/desc_input"
         android:layout_width="300dp"
+        android:inputType="textCapSentences"
         android:layout_height="150dp"
         android:layout_below="@+id/desc_title"
         android:layout_centerHorizontal="true"
@@ -185,15 +188,15 @@
         android:id="@+id/prerequisite_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_below="@id/pathway_layout"
+        android:layout_centerInParent="true"
         android:layout_marginTop="12dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pre-requisites:"
-            android:textSize="20dp"/>
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/prerequisite_input"
@@ -201,6 +204,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:hint="e.g. INFO501, MATH601"
+            android:inputType="textCapCharacters"
             android:textAlignment="center" />
     </LinearLayout>
 
@@ -208,15 +212,15 @@
         android:id="@+id/corequisite_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_below="@id/prerequisite_layout"
+        android:layout_centerInParent="true"
         android:layout_marginTop="12dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Co-requisites:"
-            android:textSize="20dp"/>
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/corequisite_input"
@@ -224,6 +228,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:hint="e.g. COMP502, INFO502"
+            android:inputType="textCapCharacters"
             android:textAlignment="center" />
     </LinearLayout>
 
