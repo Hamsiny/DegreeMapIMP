@@ -20,12 +20,19 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ModuleAdapter.ModuleViewholder holder, int position, @NonNull Module model) {
+    protected void onBindViewHolder(@NonNull ModuleAdapter.ModuleViewholder holder, final int position, @NonNull Module model) {
         holder.code.setText(model.getCode());
         holder.name.setText(model.getTitle());
         holder.description.setText(model.getDescription());
         holder.level.setText("Level " + model.getLevel());
         holder.credits.setText(model.getCredits() + " Credits");
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClick.onItemClick(position);
+            }
+        });
 
     }
 
@@ -46,10 +53,22 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
             description = view.findViewById(R.id.module_description);
             level = view.findViewById(R.id.module_level);
             credits = view.findViewById(R.id.module_credits);
+
         }
+    }
+
+    private OnItemClicked onClick;
+
+    public interface OnItemClicked {
+        void onItemClick(int position);
     }
 
     public void deleteModule(int position) {
         getSnapshots().getSnapshot(position).getReference().delete();
+    }
+
+    public void setOnClick(OnItemClicked onClick)
+    {
+        this.onClick=onClick;
     }
 }

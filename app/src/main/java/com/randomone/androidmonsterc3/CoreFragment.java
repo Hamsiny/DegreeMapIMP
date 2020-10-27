@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,7 +33,7 @@ import java.util.List;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
-public class CoreFragment extends Fragment {
+public class CoreFragment extends Fragment implements ModuleAdapter.OnItemClicked {
 
     FirestoreRecyclerOptions<Module> options;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -168,7 +169,6 @@ public class CoreFragment extends Fragment {
                     editModule(position);
                     adapter.notifyDataSetChanged();
                 }
-
             }
 
             @Override
@@ -260,5 +260,11 @@ public class CoreFragment extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        final String id = adapter.getSnapshots().getSnapshot(position).getReference().getId();
+        DialogFragment dialogFragment = ModuleDialogFragment.newInstance(id);
     }
 }
