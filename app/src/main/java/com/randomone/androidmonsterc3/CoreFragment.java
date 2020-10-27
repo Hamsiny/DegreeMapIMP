@@ -186,6 +186,21 @@ public class CoreFragment extends Fragment implements ModuleAdapter.OnItemClicke
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
+
+        adapter.setOnItemClickListener(new ModuleAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                Module module = documentSnapshot.toObject(Module.class);
+                String id = documentSnapshot.getId();
+                String code = module.getCode();
+
+                DialogFragment dialog = ModuleDialogFragment.newInstance(module);
+                dialog.show(getParentFragmentManager(), "tag");
+
+                Toast.makeText(getContext(), "Code: " + code + " ID: " + id, Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     //method asks user for delete confirmation, and passes viewholder position to adapter if yes

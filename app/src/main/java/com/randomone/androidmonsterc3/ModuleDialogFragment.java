@@ -12,9 +12,11 @@ import androidx.fragment.app.DialogFragment;
 
 public class ModuleDialogFragment extends DialogFragment {
 
+
+    //TODO GET METHOD AND POPULATE TEXTVIEWS
     private TextView mCode, mTitle, mDescription, mTime, mCredits, mLevel, mPathway, mPrerequisites, mCorequisites;
 
-    static ModuleDialogFragment newInstance(String id) {
+    static ModuleDialogFragment newInstance(Module module) {
         ModuleDialogFragment frag = new ModuleDialogFragment();
         return frag;
     }
