@@ -1,10 +1,13 @@
 package com.randomone.androidmonsterc3;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 import java.util.Map;
 
-public class Module {
+public class Module implements Parcelable {
 
     private String Code;
     private String Title;
@@ -31,6 +34,30 @@ public class Module {
         this.Prerequisites = prerequisites;
         this.Corequisite = corequisite;
     }
+
+    protected Module(Parcel in) {
+        Code = in.readString();
+        Title = in.readString();
+        Description = in.readString();
+        Time = in.readString();
+        Credits = in.readInt();
+        Level = in.readInt();
+        Pathway = in.createStringArrayList();
+        Prerequisites = in.createStringArrayList();
+        Corequisite = in.createStringArrayList();
+    }
+
+    public static final Creator<Module> CREATOR = new Creator<Module>() {
+        @Override
+        public Module createFromParcel(Parcel in) {
+            return new Module(in);
+        }
+
+        @Override
+        public Module[] newArray(int size) {
+            return new Module[size];
+        }
+    };
 
     public String getCode() {
         return Code;
@@ -102,5 +129,23 @@ public class Module {
 
     public void setCorequisite(List<String> corequisite) {
         this.Corequisite = corequisite;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(Code);
+        parcel.writeString(Title);
+        parcel.writeString(Description);
+        parcel.writeString(Time);
+        parcel.writeInt(Credits);
+        parcel.writeInt(Level);
+        parcel.writeStringList(Pathway);
+        parcel.writeStringList(Prerequisites);
+        parcel.writeStringList(Corequisite);
     }
 }
