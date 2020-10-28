@@ -12,12 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
-
-public class ModuleDialogFragment extends DialogFragment {
-
->>>>>>> popup-info
 
 public class ModuleDialogFragment extends DialogFragment {
     private TextView mCode, mTitle, mDescription, mTime, mCredits, mLevel, mPathway, mPrerequisites, mCorequisites;
@@ -32,11 +26,7 @@ public class ModuleDialogFragment extends DialogFragment {
     @Override
     public void onStart() {
         getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent); //this removes white corners to the dialog
-<<<<<<< HEAD
         int dialogWidth = 1200;     //todo make this work on other device resolutions
-=======
-        int dialogWidth = 1200;     //todo make this work on other devices
->>>>>>> popup-info
         int dialogHeight = 1800;
         getDialog().getWindow().setLayout(dialogWidth, dialogHeight);   //this sets the size of the dialogbox
         super.onStart();
@@ -112,10 +102,6 @@ public class ModuleDialogFragment extends DialogFragment {
                 mCorequisites.setText(corequisiteLine);
             }
         }
-<<<<<<< HEAD
-=======
-        
->>>>>>> popup-info
         mExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,7 +113,6 @@ public class ModuleDialogFragment extends DialogFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
         super.onViewCreated(view, savedInstanceState);
     }
 }
