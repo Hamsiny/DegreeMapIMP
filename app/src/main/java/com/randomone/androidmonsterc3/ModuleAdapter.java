@@ -30,13 +30,6 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
         holder.level.setText("Level " + model.getLevel());
         holder.credits.setText(model.getCredits() + " Credits");
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClick.onItemClick(position);
-            }
-        });
-
     }
 
     @NonNull
