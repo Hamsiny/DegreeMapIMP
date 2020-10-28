@@ -134,7 +134,8 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
     }
 
     public void newStudent(){
-        //todo: this lol
+        Intent intent = new Intent(this, StudentCreatorActivity.class);
+        startActivity(intent);
     }
 }
 
