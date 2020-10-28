@@ -1,9 +1,12 @@
 package com.randomone.androidmonsterc3;
 
+import android.content.Context;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -26,10 +29,27 @@ public class ModuleDialogFragment extends DialogFragment {
     @Override
     public void onStart() {
         getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent); //this removes white corners to the dialog
-        int dialogWidth = 1200;     //todo make this work on other device resolutions
+
+        //getting the device resolution and scaling them to the ideal size
+        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        Point size = new Point();
+        wm.getDefaultDisplay().getRealSize(size);
+        int screenHeight = size.y;
+        int screenWidth = size.x;
+
+        int dialogWidth = 1200;     //4k devices look bad if they use the formula so i hardcoded this for big screens
         int dialogHeight = 1800;
+
+        if (screenHeight < 3500 || screenWidth < 1600) {
+            dialogWidth = (int) (screenWidth/1.2);
+            dialogHeight = (int) (screenHeight/1.7);
+        }
+
+
         getDialog().getWindow().setLayout(dialogWidth, dialogHeight);   //this sets the size of the dialogbox
         super.onStart();
+
+
     }
 
     @Nullable
