@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mStudentEntrance;
     private Button mManagerEntrance;
     Dialog dialog;
+    boolean isActivityRestarting;
 
 
     @Override
@@ -32,13 +33,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
-
-
         mStudentEntrance = (Button) findViewById(R.id.button_entrance_student);
         mManagerEntrance = (Button) findViewById(R.id.button_entrance_manager);
+
+        showDisclaimerPopup();
 
         /*mManagerEntrance.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,9 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+    public void showDisclaimerPopup(){
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.disclaimer_dialog);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
