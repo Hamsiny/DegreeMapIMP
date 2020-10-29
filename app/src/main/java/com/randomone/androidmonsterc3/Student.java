@@ -10,18 +10,20 @@ public class Student implements Parcelable {
     public String phone;
     public String email;
     public String photoURL;
+    public String pathway;
 
     public Student() {
         //Empty Constructor
     }
 
-    public Student(String fName, String lName, int studentID, String phone, String email, String photoURL) {
+    public Student(String fName, String lName, int studentID, String phone, String email, String photoURL, String pathway) {
         this.fName = fName;
         this.lName = lName;
         this.studentID = studentID;
         this.phone = phone;
         this.email = email;
         this.photoURL = photoURL;
+        this.pathway = pathway;
     }
 
     protected Student(Parcel in) {
@@ -31,6 +33,7 @@ public class Student implements Parcelable {
         phone = in.readString();
         email = in.readString();
         photoURL = in.readString();
+        pathway = in.readString();
     }
 
     @Override
@@ -41,6 +44,7 @@ public class Student implements Parcelable {
         dest.writeString(phone);
         dest.writeString(email);
         dest.writeString(photoURL);
+        dest.writeString(pathway);
     }
 
     @Override
@@ -106,6 +110,14 @@ public class Student implements Parcelable {
 
     public void setPhotoURL(String photoURL) {
         this.photoURL = photoURL;
+    }
+
+    public String getPathway() {
+        return pathway;
+    }
+
+    public void setPathway(String pathway) {
+        this.pathway = pathway;
     }
 }
 

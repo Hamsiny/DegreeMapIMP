@@ -9,19 +9,26 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 public class StudentCreatorActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -31,10 +38,13 @@ public class StudentCreatorActivity extends AppCompatActivity {
     StorageReference mStorageRef;
     StorageTask mStorageTask;
 
-    private EditText mFirstname, mLastname, mPhone, mEmail;
+    private EditText mFirstname, mLastname, mPhone, mEmail, mStudentID;
     private Button mUploadButton;
+    private Spinner mPathway;
     private ImageView mProfileImage;
     private Uri mImageUri;
+
+    private String link;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,12 +53,19 @@ public class StudentCreatorActivity extends AppCompatActivity {
 
         mFirstname = findViewById(R.id.student_firstname);
         mLastname = findViewById(R.id.student_lastname);
+        mStudentID = findViewById(R.id.student_id);
         mPhone = findViewById(R.id.student_phone);
         mEmail = findViewById(R.id.student_email);
         mUploadButton = findViewById(R.id.student_upload_image);
         mProfileImage = findViewById(R.id.student_image);
+        mPathway = findViewById(R.id.student_pathway);
 
         mStorageRef = storage.getReference("studentImages");
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
+                (this, R.array.pathway_options, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mPathway.setAdapter(adapter);
 
         //open file dialog for profile image
         mUploadButton.setOnClickListener(new View.OnClickListener() {
@@ -95,11 +112,36 @@ public class StudentCreatorActivity extends AppCompatActivity {
 
     private void uploadStudent() {
         if (mImageUri != null) {
-            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+            final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
+
+            mStorageTask = fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                    while (!urlTask.isSuccessful()) ;
+                    Uri url = urlTask.getResult();
+                    link = url.toString();
+                    Toast.makeText(StudentCreatorActivity.this, link, Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            Student student = new Student(
+                    mFirstname.getText().toString(),
+                    mLastname.getText().toString(),
+                    Integer.parseInt(mStudentID.getText().toString()),
+                    mPhone.getText().toString(),
+                    mEmail.getText().toString(),
+                    link,
+                    mPathway.getSelectedItem().toString());
+
+            db.collection("students").add(student);
+            finish();
         }
 
     }
+
 
     private String getFileExtension(Uri uri) {
         ContentResolver cR = getContentResolver();

@@ -1,139 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:padding="12dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Student Image:"
-        android:textSize="24dp"
-        android:textColor="@color/wintecDarkGrey"/>
+    android:orientation="vertical">
+
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="12dp">
 
-        <Button
-            android:id="@+id/student_upload_image"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/wintecDarkGrey"
-            android:text="Upload"/>
+            android:text="Student Image:"
+            android:textColor="@color/wintecDarkGrey"
+            android:textSize="24dp" />
 
-        <ImageView
-            android:id="@+id/student_image"
-            android:layout_marginStart="26dp"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/ic_placeholder"/>
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/student_upload_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/wintecDarkGrey"
+                android:text="Upload" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Student Name:"
-        android:textSize="24dp"
-        android:textColor="@color/wintecDarkGrey"/>
+            <ImageView
+                android:id="@+id/student_image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="26dp"
+                android:src="@drawable/ic_placeholder" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="First Name:"
-            android:textSize="20sp"/>
+            android:layout_marginTop="20dp"
+            android:text="Student Name:"
+            android:textColor="@color/wintecDarkGrey"
+            android:textSize="24dp" />
 
-        <EditText
-            android:id="@+id/student_firstname"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:hint="Your First Name(s)"
-            android:textSize="20sp"/>
-    </LinearLayout>
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="First Name:"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/student_firstname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:hint="Your First Name(s)"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Last Name:"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/student_lastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:hint="Your Last Name(s)"
+                android:textSize="20sp" />
+        </LinearLayout>
 
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Last Name:"
-            android:textSize="20sp"/>
+            android:layout_marginTop="20dp"
+            android:text="Student Details:"
+            android:textColor="@color/wintecDarkGrey"
+            android:textSize="24dp" />
 
-        <EditText
-            android:id="@+id/student_lastname"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:hint="Your Last Name(s)"
-            android:textSize="20sp"/>
-    </LinearLayout>
+            android:orientation="horizontal">
 
-    <TextView
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Student Details:"
-        android:textSize="24dp"
-        android:textColor="@color/wintecDarkGrey"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Student ID:"
+                android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <EditText
+                android:id="@+id/student_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:hint="Your Wintec Student ID"
+                android:inputType="number"
+                android:textSize="20sp" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Email:"
-            android:textSize="20sp"/>
-
-        <EditText
-            android:id="@+id/student_email"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:hint="Your Email Address"
-            android:inputType="textEmailAddress"
-            android:textSize="20sp"/>
-    </LinearLayout>
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Email:"
+                android:textSize="20sp" />
 
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Phone:"
-            android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/student_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:hint="Your Email Address"
+                android:inputType="textEmailAddress"
+                android:textSize="20sp" />
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/student_phone"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:hint="Your Phone Number"
-            android:inputType="phone"
-            android:textSize="20sp"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Phone:"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/student_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:hint="Your Phone Number"
+                android:inputType="phone"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Pathway:"
+                android:textSize="20sp" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/student_pathway"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:entries="@array/pathway_options" />
+        </LinearLayout>
+
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
