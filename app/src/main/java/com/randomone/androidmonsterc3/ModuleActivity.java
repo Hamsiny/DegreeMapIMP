@@ -123,6 +123,10 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new WebFragment()).commit();
                 break;
+            case R.id.nav_students:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new StudentFragment()).commit();
+                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

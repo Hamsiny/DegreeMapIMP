@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center_horizontal"
+    android:orientation="vertical"
     android:padding="18dp">
 
     <RelativeLayout
@@ -31,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/main_item_group"
-        android:layout_marginTop="18dp">
+        android:layout_marginTop="8dp">
 
         <ImageView
             android:id="@+id/student_recycler_photo"
@@ -54,6 +55,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/student_recycler_pathway"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -78,7 +80,7 @@
                 android:src="@drawable/ic_email" />
 
             <TextView
-                android:id="@+id/student_email"
+                android:id="@+id/student_recycler_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -112,4 +114,4 @@
 
 
     </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

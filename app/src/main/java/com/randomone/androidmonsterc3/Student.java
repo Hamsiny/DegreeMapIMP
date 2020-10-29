@@ -6,7 +6,7 @@ import android.os.Parcelable;
 public class Student implements Parcelable {
     public String fName;
     public String lName;
-    public int studentID;
+    public Long studentID;
     public String phone;
     public String email;
     public String photoURL;
@@ -16,7 +16,7 @@ public class Student implements Parcelable {
         //Empty Constructor
     }
 
-    public Student(String fName, String lName, int studentID, String phone, String email, String photoURL, String pathway) {
+    public Student(String fName, String lName, Long studentID, String phone, String email, String photoURL, String pathway) {
         this.fName = fName;
         this.lName = lName;
         this.studentID = studentID;
@@ -29,7 +29,7 @@ public class Student implements Parcelable {
     protected Student(Parcel in) {
         fName = in.readString();
         lName = in.readString();
-        studentID = in.readInt();
+        studentID = in.readLong();
         phone = in.readString();
         email = in.readString();
         photoURL = in.readString();
@@ -40,7 +40,7 @@ public class Student implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(fName);
         dest.writeString(lName);
-        dest.writeInt(studentID);
+        dest.writeLong(studentID);
         dest.writeString(phone);
         dest.writeString(email);
         dest.writeString(photoURL);
@@ -80,11 +80,11 @@ public class Student implements Parcelable {
         this.lName = lName;
     }
 
-    public int getStudentID() {
+    public Long getStudentID() {
         return studentID;
     }
 
-    public void setStudentID(int studentID) {
+    public void setStudentID(Long studentID) {
         this.studentID = studentID;
     }
 

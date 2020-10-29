@@ -103,14 +103,14 @@ public class StudentCreatorActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.save_module:
-                uploadStudent();
+                uploadImage();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void uploadStudent() {
+    private void uploadImage() {
         if (mImageUri != null) {
             final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
@@ -120,28 +120,32 @@ public class StudentCreatorActivity extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                     Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
-                    while (!urlTask.isSuccessful()) ;
+                    while (!urlTask.isSuccessful());
                     Uri url = urlTask.getResult();
-                    link = url.toString();
-                    Toast.makeText(StudentCreatorActivity.this, link, Toast.LENGTH_SHORT).show();
+                    link = String.valueOf(url);
+                    createStudent(link);
                 }
             });
 
-            Student student = new Student(
-                    mFirstname.getText().toString(),
-                    mLastname.getText().toString(),
-                    Integer.parseInt(mStudentID.getText().toString()),
-                    mPhone.getText().toString(),
-                    mEmail.getText().toString(),
-                    link,
-                    mPathway.getSelectedItem().toString());
 
-            db.collection("students").add(student);
-            finish();
         }
 
     }
 
+    private void createStudent(String link) {
+
+        Student student = new Student(
+                mFirstname.getText().toString(),
+                mLastname.getText().toString(),
+                Long.parseLong(mStudentID.getText().toString()),
+                mPhone.getText().toString(),
+                mEmail.getText().toString(),
+                link,
+                mPathway.getSelectedItem().toString());
+
+        db.collection("students").add(student);
+        finish();
+    }
 
     private String getFileExtension(Uri uri) {
         ContentResolver cR = getContentResolver();
