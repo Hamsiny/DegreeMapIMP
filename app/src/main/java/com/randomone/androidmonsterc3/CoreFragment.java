@@ -194,9 +194,6 @@ public class CoreFragment extends Fragment {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
                 Module module = documentSnapshot.toObject(Module.class);
-                String id = documentSnapshot.getId();
-                String code = module.getCode();
-
                 DialogFragment dialog = ModuleDialogFragment.newInstance(module);
                 Bundle args = new Bundle();
                 args.putParcelable("module", module);

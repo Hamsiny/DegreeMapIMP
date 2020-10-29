@@ -14,14 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,11 +36,14 @@ public class StudentCreatorActivity extends AppCompatActivity {
     StorageReference mStorageRef;
     StorageTask mStorageTask;
 
+
     private EditText mFirstname, mLastname, mPhone, mEmail, mStudentID;
     private Button mUploadButton;
     private Spinner mPathway;
     private ImageView mProfileImage;
     private Uri mImageUri;
+    private Student mStudent;
+    private Boolean imageChanged = false;
 
     private String link;
 
@@ -60,6 +61,8 @@ public class StudentCreatorActivity extends AppCompatActivity {
         mProfileImage = findViewById(R.id.student_image);
         mPathway = findViewById(R.id.student_pathway);
 
+        mStudent = getIntent().getParcelableExtra("student");
+
         mStorageRef = storage.getReference("studentImages");
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
@@ -67,10 +70,46 @@ public class StudentCreatorActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mPathway.setAdapter(adapter);
 
+        Intent intent = getIntent();
+        if (intent.hasExtra("id")) {
+
+
+            mFirstname.setText(mStudent.getfName());
+            mLastname.setText(mStudent.getlName());
+            mStudentID.setText(mStudent.getStudentID().toString());
+            mPhone.setText(mStudent.getPhone());
+            mEmail.setText(mStudent.getEmail());
+            link = mStudent.getPhotoURL();
+            Glide.with(this).load(link).centerCrop().into(mProfileImage);
+
+            String pathway = (mStudent.getPathway());
+            switch (pathway) {
+                case "Undecided":
+                    mPathway.setSelection(0);
+                    break;
+                case "Software Engineering":
+                    mPathway.setSelection(1);
+                    break;
+                case "Network Engineering":
+                    mPathway.setSelection(2);
+                    break;
+                case "Database Architecture":
+                    mPathway.setSelection(3);
+                    break;
+                case "Web Development":
+                    mPathway.setSelection(4);
+                    break;
+            }
+
+
+        }
+
+
         //open file dialog for profile image
         mUploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                imageChanged = true;
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -111,24 +150,30 @@ public class StudentCreatorActivity extends AppCompatActivity {
     }
 
     private void uploadImage() {
-        if (mImageUri != null) {
-            final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
-                    + "." + getFileExtension(mImageUri));
+        Intent intent = getIntent();
+        if (imageChanged == false) {        //todo make it so that images can be changed in an edit
+            createStudent(link);
+        } else {
+            if (mImageUri != null) {
+                final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                        + "." + getFileExtension(mImageUri));
 
-            mStorageTask = fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                mStorageTask = fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                    Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
-                    while (!urlTask.isSuccessful());
-                    Uri url = urlTask.getResult();
-                    link = String.valueOf(url);
-                    createStudent(link);
-                }
-            });
+                        Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                        while (!urlTask.isSuccessful());
+                        Uri url = urlTask.getResult();
+                        link = String.valueOf(url);
+                        createStudent(link);
+                    }
+                });
 
 
+            }
         }
+
 
     }
 
@@ -143,7 +188,12 @@ public class StudentCreatorActivity extends AppCompatActivity {
                 link,
                 mPathway.getSelectedItem().toString());
 
-        db.collection("students").add(student);
+        Intent intent = getIntent();
+        if (intent.hasExtra("id")) {
+            db.collection("students").document(intent.getStringExtra("id")).set(student);
+        } else {
+            db.collection("students").add(student);
+        }
         finish();
     }
 
