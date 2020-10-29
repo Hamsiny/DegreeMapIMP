@@ -24,6 +24,9 @@
         <activity
             android:name=".ModuleCreatorActivity"
             android:label="Create/Edit Module" />
+        <activity
+            android:name=".StudentCreatorActivity"
+            android:label="Create/Edit Student" />
 
         <activity
             android:name=".ModuleActivity"
