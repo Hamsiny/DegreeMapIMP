@@ -147,11 +147,8 @@ public class StudentFragment extends Fragment {
                     intent.putExtra("id", id);
                     intent.putExtra("student", student);
                     startActivity(intent);
-                    adapter.notifyDataSetChanged();
-
                 }
             }
         });
-
     }
 }

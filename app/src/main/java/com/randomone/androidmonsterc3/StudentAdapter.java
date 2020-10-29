@@ -37,12 +37,6 @@ public class StudentAdapter extends FirestoreRecyclerAdapter<Student, StudentAda
         holder.pathway.setText(model.getPathway());
         holder.id.setText(String.valueOf(model.getStudentID()));
         Glide.with(holder.itemView.getContext()).load(model.getPhotoURL()).centerCrop().into(holder.image);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 
     public class StudentViewholder extends RecyclerView.ViewHolder {
