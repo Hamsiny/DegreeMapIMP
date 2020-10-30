@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -20,20 +21,30 @@ import com.google.android.material.navigation.NavigationView;
 
 
 public class ModuleActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private DrawerLayout drawer;
+    public static final String EXTRA_MANAGERMODE = "com.randomone.androidmonsterc3.EXTRA_MANAGERMODE";
 
+    private DrawerLayout drawer;
     private FloatingActionButton fab;
     private ExtendedFloatingActionButton efabStudent, efabModule;
     private Animation fabOpen, fabClose;
 
-    Boolean manager = true;
+    public Boolean managerMode = false;
     Boolean isOpen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modules_manager); //TODO Implement manager/student distinct xml file with Intent extra for manager eg... If user = manager then manager.xml
+        Intent intent = getIntent();
+        managerMode = intent.getBooleanExtra(EXTRA_MANAGERMODE, false);
 
+        if (managerMode == true) {
+            setContentView(R.layout.activity_modules_manager);
+        }
+        else {
+            setContentView(R.layout.activity_modules_student);
+        }
+
+        fab = findViewById(R.id.fab);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);                   //replacing action bar with toolbar for navmenu
 
@@ -41,7 +52,6 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
         NavigationView navigationView = findViewById(R.id.nav_view);        //used to call the onNavigationItemSelected Method
         navigationView.setNavigationItemSelectedListener(this);
 
-        fab = findViewById(R.id.fab);
         efabStudent = findViewById(R.id.fab2);
         efabModule = findViewById(R.id.fab1);
         fabClose = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
@@ -88,6 +98,10 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
                 newStudent();
             }
         });
+
+        if (managerMode == false) {
+            fab.setVisibility(View.GONE);
+        }
 
     }
 
@@ -140,6 +154,10 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
     public void newStudent(){
         Intent intent = new Intent(this, StudentCreatorActivity.class);
         startActivity(intent);
+    }
+
+    public Boolean getManagerMode() {
+        return managerMode;
     }
 }
 

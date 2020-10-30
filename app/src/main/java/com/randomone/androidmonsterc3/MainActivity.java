@@ -1,8 +1,5 @@
 package com.randomone.androidmonsterc3;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -17,16 +14,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String MANAGER_ENTRANCE_PASSWORD = "WinITDMP01";
     final Context context = this;
-    private Button mStudentEntrance;
-    private Button mManagerEntrance;
     Dialog dialog;
     boolean isActivityRestarting;
-
+    private Button mStudentEntrance;
+    private Button mManagerEntrance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         showDisclaimerPopup();
 
-        /*mManagerEntrance.setOnClickListener(new View.OnClickListener() {
+        mManagerEntrance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // get popup layout view
@@ -55,56 +53,50 @@ public class MainActivity extends AppCompatActivity {
                         .findViewById(R.id.editTextDialogUserInput);
 
                 // set dialog message
-                alertDialogBuilder
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder
                         .setCancelable(false)
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
+                                    public void onClick(DialogInterface dialog, int id) {
                                         // get user input and check the password is right or not
                                         String inputPass = userInput.getText().toString();
-                                        if (inputPass.equalsIgnoreCase(MANAGER_ENTRANCE_PASSWORD)){
+                                        if (inputPass.equalsIgnoreCase(MANAGER_ENTRANCE_PASSWORD)) {
                                             Intent intent = new Intent(MainActivity.this, ModuleActivity.class);
+                                            Boolean managerMode = true;
+                                            intent.putExtra(ModuleActivity.EXTRA_MANAGERMODE, managerMode);
                                             startActivity(intent);
-                                        }else{
+                                        } else {
                                             Toast.makeText(context, "Wrong password, please try again", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 })
                         .setNegativeButton("Cancel",
                                 new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
+                                    public void onClick(DialogInterface dialog, int id) {
                                         dialog.cancel();
                                     }
-                                });
+                                }).create();
 
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
+
 
                 // show it
                 alertDialog.show();
             }
-        });*/
+        });
 
-            mManagerEntrance.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(MainActivity.this, ModuleActivity.class);
-                    startActivity(intent);
-                }
-            });
-
-            mStudentEntrance.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(MainActivity.this, ModuleActivity.class);  //todo pass Manager boolean to ModuleActivity to decide if we should use manager or student XML
-                    startActivity(intent);
-                }
-            });
+        mStudentEntrance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ModuleActivity.class);  //todo pass Manager boolean to ModuleActivity to decide if we should use manager or student XML
+                startActivity(intent);
+            }
+        });
 
 
-        }
+    }
 
-    public void showDisclaimerPopup(){
+    public void showDisclaimerPopup() {
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.disclaimer_dialog);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
