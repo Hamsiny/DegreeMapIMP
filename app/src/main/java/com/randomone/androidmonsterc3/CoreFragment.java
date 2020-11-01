@@ -46,6 +46,7 @@ public class CoreFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private FirebaseFirestore mDatabaseRef;
     private ModuleAdapter adapter;
+    boolean managerMode;
 
 
     String[] semesterText = {
@@ -80,6 +81,9 @@ public class CoreFragment extends Fragment {
                 nextSemester(view);
             }
         });
+
+        ModuleActivity activity = (ModuleActivity) getActivity();       //getting managerMode boolean
+        managerMode = activity.getManagerMode();
 
 
         mRecyclerView = rootView.findViewById(R.id.recycler_view);
@@ -185,8 +189,12 @@ public class CoreFragment extends Fragment {
             }
         };
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
-        itemTouchHelper.attachToRecyclerView(mRecyclerView);
+        //if block removes the swipeability of non manager users
+        if (managerMode == true) {
+            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+            itemTouchHelper.attachToRecyclerView(mRecyclerView);
+        }
+
 
 
         //Recyclerview click listener
@@ -228,7 +236,6 @@ public class CoreFragment extends Fragment {
 
     //creating a document snapshot with the provided reference ID, then getting the data to use in EXTRA's for activity intent.
     private void editModule(final int position) {
-
         //document reference
         final String id = adapter.getSnapshots().getSnapshot(position).getReference().getId();
 

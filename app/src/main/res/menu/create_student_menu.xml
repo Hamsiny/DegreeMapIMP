@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/save_module"
-        android:title="Save"
-        app:showAsAction="always"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group android:id="@+id/moduleselect" android:checkableBehavior="all">
+        <item
+            android:id="@+id/software_stream"
+            android:icon="@drawable/ic_software"
+            android:iconTint="@color/wintecDarkGrey"
+            android:title="Software Engineering" />
+        <item
+            android:id="@+id/networking_stream"
+            android:icon="@drawable/ic_network"
+            android:iconTint="@color/wintecDarkGrey"
+            android:title="Network Engineering" />
+        <item
+            android:id="@+id/database_stream"
+            android:icon="@drawable/ic_database"
+            android:iconTint="@color/wintecDarkGrey"
+            android:title="Database Architecture" />
+        <item
+            android:id="@+id/web_stream"
+            android:icon="@drawable/ic_web"
+            android:iconTint="@color/wintecDarkGrey"
+            android:title="Web Development" />
+
+    </group>
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_about"
+            android:title="About" />
+
+    </group>
+
 </menu>
