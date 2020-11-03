@@ -8,27 +8,30 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/button_entrance_student"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="8dp"
         android:text="TELL US WHO YOU ARE ?"
         android:textColor="@android:color/black"
-        android:textSize="16sp" />
+        android:textSize="15sp" />
+
 
     <Button
         android:id="@+id/button_entrance_student"
         android:layout_width="160dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:background="@color/wintecYellow"
-        android:text="STUDENT" />
+        android:text="STUDENT"
+        android:textColor="@android:color/black"/>
 
     <Button
         android:id="@+id/button_entrance_manager"
         android:layout_width="160dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/button_entrance_student"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:background="@color/wintecYellow"
-        android:text="MANAGER" />
+        android:text="MANAGER"
+        android:textColor="@android:color/black"/>
 
 </RelativeLayout>

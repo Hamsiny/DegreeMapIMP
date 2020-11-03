@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
@@ -14,7 +15,8 @@
             android:id="@+id/arrow_left_semester_select"
             android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:background="@drawable/ic_arrowleft" />
+            android:background="@drawable/ic_arrowleft"
+            android:backgroundTint="@color/wintecDarkGrey" />
 
         <TextView
             android:id="@+id/text_view_semester_select"
@@ -22,7 +24,7 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:layout_marginTop="5dp"
-            android:text="Semester Select"
+            android:text="All Semesters"
             android:textSize="25sp" />
 
         <Button
@@ -30,7 +32,8 @@
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/ic_arrowright" />
+            android:background="@drawable/ic_arrowright"
+            android:backgroundTint="@color/wintecDarkGrey"/>
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -41,14 +44,6 @@
         tools:listitem="@layout/module_card" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_total_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:backgroundTint="@color/wintecDarkGrey"
-        android:layout_margin="32dp"
-        android:src="@drawable/ic_add" />
+
 
 </RelativeLayout>

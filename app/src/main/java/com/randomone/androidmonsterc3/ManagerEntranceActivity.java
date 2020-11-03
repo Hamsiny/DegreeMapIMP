@@ -46,7 +46,7 @@ public class ManagerEntranceActivity extends AppCompatActivity {
         mTextViewStu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ManagerEntranceActivity.this, ModuleActivity.class);
+                Intent intent = new Intent(ManagerEntranceActivity.this, ModuleActivityStudents.class);
                 startActivity(intent);
             }
         });

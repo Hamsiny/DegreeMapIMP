@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,8 +32,7 @@ import java.util.List;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
-public class CoreFragment extends Fragment {
-
+public class NetworkingFragment extends Fragment {
     FirestoreRecyclerOptions<Module> options;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -92,7 +89,7 @@ public class CoreFragment extends Fragment {
         adapter = new ModuleAdapter(options);
         mRecyclerView.setAdapter(adapter);
 
-        getActivity().setTitle("Core Stream");
+        getActivity().setTitle("Networking Stream");
 
         return rootView;
     }
@@ -124,11 +121,11 @@ public class CoreFragment extends Fragment {
 
         if (sIndex == 0) {
             options = new FirestoreRecyclerOptions.Builder<Module>()
-                    .setQuery(mDatabaseRef.collection("modules").whereArrayContains("pathway", "core").orderBy("time"), Module.class)
+                    .setQuery(mDatabaseRef.collection("modules").whereArrayContains("pathway", "networking").orderBy("time"), Module.class)
                     .build();
         } else {
             options = new FirestoreRecyclerOptions.Builder<Module>()
-                    .setQuery(mDatabaseRef.collection("modules").whereArrayContains("pathway", "core").whereEqualTo("time", "S" + sIndex), Module.class)
+                    .setQuery(mDatabaseRef.collection("modules").whereArrayContains("pathway", "networking").whereEqualTo("time", "S" + sIndex), Module.class)
                     .build();
         }
         return options;
@@ -170,6 +167,7 @@ public class CoreFragment extends Fragment {
                     editModule(position);
                     adapter.notifyDataSetChanged();
                 }
+
             }
 
             @Override
@@ -187,25 +185,10 @@ public class CoreFragment extends Fragment {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
-
-
-        //Recyclerview click listener
-        adapter.setOnItemClickListener(new ModuleAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-                Module module = documentSnapshot.toObject(Module.class);
-                DialogFragment dialog = ModuleDialogFragment.newInstance(module);
-                Bundle args = new Bundle();
-                args.putParcelable("module", module);
-                dialog.setArguments(args);
-                dialog.show(getParentFragmentManager(), "tag");
-
-            }
-        });
     }
 
     //method asks user for delete confirmation, and passes viewholder position to adapter if yes
-    private void deleteDialog(final int position) {
+    private void deleteDialog(final int position){
         new AlertDialog.Builder(getContext())
                 .setTitle("Delete Module?")
                 .setMessage("This will permanently remove this module from every device.")
@@ -237,7 +220,7 @@ public class CoreFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot moduleDoc = task.getResult();
-                if (moduleDoc.exists()) {
+                if (moduleDoc.exists()){
 
                     //savng snapshot data to extras
                     Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
@@ -270,7 +253,8 @@ public class CoreFragment extends Fragment {
                     intent.putStringArrayListExtra(ModuleCreatorActivity.EXTRA_COREQUISITE, (ArrayList<String>) corequisites);
                     startActivity(intent);
 
-                } else {
+                }
+                else {
                     Toast.makeText(getContext(), "ERROR: DOCUMENT_ID_NOT_RETRIEVED", Toast.LENGTH_SHORT).show();
                 }
             }

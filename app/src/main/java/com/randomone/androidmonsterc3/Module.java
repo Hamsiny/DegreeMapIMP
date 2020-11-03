@@ -1,31 +1,70 @@
 package com.randomone.androidmonsterc3;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.List;
 import java.util.Map;
 
-public class Module {
-    public String Title;
-    public String Description;
-    public String Time;
-    public int Credits;
-    public int Level;
-    public Map<String, Boolean> Pathway;
-    public Map<String, Boolean> Prerequisite;
-    public Map<String, Boolean> Corequisite;
+public class Module implements Parcelable {
+
+    private String Code;
+    private String Title;
+    private String Description;
+    private String Time;
+    private int Credits;
+    private int Level;
+    private List<String> Pathway;
+    private List<String> Prerequisites;
+    private List<String> Corequisite;
 
     public Module(){
 
     }
 
-    public Module(String title, String description, String time, int credits, int level, Map<String, Boolean> pathway, Map<String, Boolean> prerequisite, Map<String, Boolean> corequisite) {
+    public Module(String code, String title, String description, String time, int credits, int level, List<String> pathway, List<String> prerequisites, List<String> corequisite) {
+        this.Code = code;
         this.Title = title;
         this.Description = description;
         this.Time = time;
         this.Credits = credits;
         this.Level = level;
         this.Pathway = pathway;
-        this.Prerequisite = prerequisite;
+        this.Prerequisites = prerequisites;
         this.Corequisite = corequisite;
+    }
+
+    protected Module(Parcel in) {
+        Code = in.readString();
+        Title = in.readString();
+        Description = in.readString();
+        Time = in.readString();
+        Credits = in.readInt();
+        Level = in.readInt();
+        Pathway = in.createStringArrayList();
+        Prerequisites = in.createStringArrayList();
+        Corequisite = in.createStringArrayList();
+    }
+
+    public static final Creator<Module> CREATOR = new Creator<Module>() {
+        @Override
+        public Module createFromParcel(Parcel in) {
+            return new Module(in);
+        }
+
+        @Override
+        public Module[] newArray(int size) {
+            return new Module[size];
+        }
+    };
+
+    public String getCode() {
+        return Code;
+    }
+
+    public void setCode(String code) {
+        Code = code;
     }
 
     public String getTitle() {
@@ -68,27 +107,45 @@ public class Module {
         this.Level = level;
     }
 
-    public Map<String, Boolean> getPathway() {
+    public List<String> getPathway() {
         return Pathway;
     }
 
-    public void setPathway(Map<String, Boolean> pathway) {
+    public void setPathway(List<String> pathway) {
         this.Pathway = pathway;
     }
 
-    public Map<String, Boolean> getPrerequisite() {
-        return Prerequisite;
+    public List<String> getPrerequisites() {
+        return Prerequisites;
     }
 
-    public void setPrerequisite(Map<String, Boolean> prerequisite) {
-        this.Prerequisite = prerequisite;
+    public void setPrerequisites(List<String> prerequisites) {
+        this.Prerequisites = prerequisites;
     }
 
-    public Map<String, Boolean> getCorequisite() {
+    public List<String> getCorequisite() {
         return Corequisite;
     }
 
-    public void setCorequisite(Map<String, Boolean> corequisite) {
+    public void setCorequisite(List<String> corequisite) {
         this.Corequisite = corequisite;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(Code);
+        parcel.writeString(Title);
+        parcel.writeString(Description);
+        parcel.writeString(Time);
+        parcel.writeInt(Credits);
+        parcel.writeInt(Level);
+        parcel.writeStringList(Pathway);
+        parcel.writeStringList(Prerequisites);
+        parcel.writeStringList(Corequisite);
     }
 }

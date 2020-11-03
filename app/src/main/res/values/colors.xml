@@ -7,4 +7,7 @@
     <color name="wintecYellow">#FFDD00</color>
     <color name="wintecDarkGrey">#3A3A3A</color>
     <color name="wintecLightGrey">#F0F0F0</color>
+
+    <color name="editGreen">#77DD77</color>
+    <color name="deleteRed">#FF6961</color>
 </resources>

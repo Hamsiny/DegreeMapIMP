@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.randomone.androidmonsterc3">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,9 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".ManagerEntranceActivity"></activity>
-
+        <activity android:name=".ModuleActivityStudents"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ManagerEntranceActivity" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".SplashScreenActivity"
@@ -22,10 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".ModuleCreatorActivity"
+            android:label="Create/Edit Module" />
+        <activity
+            android:name=".StudentCreatorActivity"
+            android:label="Create/Edit Student" />
         <activity
             android:name=".ModuleActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

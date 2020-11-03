@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String MANAGER_ENTRANCE_PASSWORD = "WinITDMP01";
+    public static final String MANAGER_ENTRANCE_PASSWORD = "WinITDMP01";
     final Context context = this;
     private Button mStudentEntrance;
     private Button mManagerEntrance;
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         mStudentEntrance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ModuleActivity.class);  //todo pass Manager boolean to ModuleActivity to decide if we should use manager or student XML
+                Intent intent = new Intent(MainActivity.this, ModuleActivityStudents.class);  //todo pass Manager boolean to ModuleActivity to decide if we should use manager or student XML
                 startActivity(intent);
             }
         });
