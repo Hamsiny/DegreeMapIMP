@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +35,9 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 public class CoreFragment extends Fragment {
 
-    FirestoreRecyclerOptions<Module> options;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirestoreRecyclerOptions<Module> options;
+
 
     int sIndex = 0;
     private TextView mSemesterText;
@@ -276,6 +276,7 @@ public class CoreFragment extends Fragment {
                     intent.putStringArrayListExtra(ModuleCreatorActivity.EXTRA_PREREQUISITE, (ArrayList<String>) prerequisites);
                     intent.putStringArrayListExtra(ModuleCreatorActivity.EXTRA_COREQUISITE, (ArrayList<String>) corequisites);
                     startActivity(intent);
+
 
                 } else {
                     Toast.makeText(getContext(), "ERROR: DOCUMENT_ID_NOT_RETRIEVED", Toast.LENGTH_SHORT).show();

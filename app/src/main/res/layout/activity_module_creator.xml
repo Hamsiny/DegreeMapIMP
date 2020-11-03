@@ -151,6 +151,7 @@
             android:id="@+id/core_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="coreBox"
             android:text="Core"
             android:textSize="18dp" />
 
@@ -159,6 +160,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Software Engineering"
+            android:onClick="specificBox"
             android:textSize="18dp" />
 
         <CheckBox
@@ -166,6 +168,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Network Engineering"
+            android:onClick="specificBox"
             android:textSize="18dp" />
 
         <CheckBox
@@ -173,6 +176,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Web Development"
+            android:onClick="specificBox"
             android:textSize="18dp" />
 
         <CheckBox
@@ -180,6 +184,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Database Architecture"
+            android:onClick="specificBox"
             android:textSize="18dp" />
 
     </LinearLayout>

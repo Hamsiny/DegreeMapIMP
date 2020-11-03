@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,8 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 public class StudentFragment extends Fragment {
 
+    private static final String TAG = "StudentFragment";
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirestoreRecyclerOptions<Student> options;
     private RecyclerView mRecyclerView;
@@ -41,7 +44,7 @@ public class StudentFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_student, container, false);
 
         mRecyclerView = rootView.findViewById(R.id.student_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
@@ -54,21 +57,24 @@ public class StudentFragment extends Fragment {
         mRecyclerView.setAdapter(adapter);
 
         getActivity().setTitle("Degree Students");
-
         return rootView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        Log.d(TAG, "onStart: ");
+
         adapter.startListening();
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        Log.d(TAG, "onStop: ");
         adapter.stopListening();
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -110,6 +116,7 @@ public class StudentFragment extends Fragment {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
+
     }
 
     private void deleteDialog(final int position) {
