@@ -40,7 +40,9 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
     }
 
     public class ModuleViewholder extends RecyclerView.ViewHolder {
+
         TextView name, code, description, level, credits;
+
         public ModuleViewholder(@NonNull View view){
             super(view);
 

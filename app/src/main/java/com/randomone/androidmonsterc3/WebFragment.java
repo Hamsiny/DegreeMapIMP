@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,6 +34,7 @@ import java.util.List;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class WebFragment extends Fragment {
+
     FirestoreRecyclerOptions<Module> options;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -43,6 +45,7 @@ public class WebFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private FirebaseFirestore mDatabaseRef;
     private ModuleAdapter adapter;
+    boolean managerMode;
 
 
     String[] semesterText = {
@@ -77,6 +80,9 @@ public class WebFragment extends Fragment {
                 nextSemester(view);
             }
         });
+
+        ModuleActivity activity = (ModuleActivity) getActivity();       //getting managerMode boolean
+        managerMode = activity.getManagerMode();
 
 
         mRecyclerView = rootView.findViewById(R.id.recycler_view);
@@ -167,7 +173,6 @@ public class WebFragment extends Fragment {
                     editModule(position);
                     adapter.notifyDataSetChanged();
                 }
-
             }
 
             @Override
@@ -183,12 +188,31 @@ public class WebFragment extends Fragment {
             }
         };
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
-        itemTouchHelper.attachToRecyclerView(mRecyclerView);
+        //if block removes the swipeability of non manager users
+        if (managerMode == true) {
+            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+            itemTouchHelper.attachToRecyclerView(mRecyclerView);
+        }
+
+
+
+        //Recyclerview click listener
+        adapter.setOnItemClickListener(new ModuleAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                Module module = documentSnapshot.toObject(Module.class);
+                DialogFragment dialog = ModuleDialogFragment.newInstance(module);
+                Bundle args = new Bundle();
+                args.putParcelable("module", module);
+                dialog.setArguments(args);
+                dialog.show(getParentFragmentManager(), "tag");
+
+            }
+        });
     }
 
     //method asks user for delete confirmation, and passes viewholder position to adapter if yes
-    private void deleteDialog(final int position){
+    private void deleteDialog(final int position) {
         new AlertDialog.Builder(getContext())
                 .setTitle("Delete Module?")
                 .setMessage("This will permanently remove this module from every device.")
@@ -211,7 +235,6 @@ public class WebFragment extends Fragment {
 
     //creating a document snapshot with the provided reference ID, then getting the data to use in EXTRA's for activity intent.
     private void editModule(final int position) {
-
         //document reference
         final String id = adapter.getSnapshots().getSnapshot(position).getReference().getId();
 
@@ -220,7 +243,7 @@ public class WebFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot moduleDoc = task.getResult();
-                if (moduleDoc.exists()){
+                if (moduleDoc.exists()) {
 
                     //savng snapshot data to extras
                     Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
@@ -253,8 +276,7 @@ public class WebFragment extends Fragment {
                     intent.putStringArrayListExtra(ModuleCreatorActivity.EXTRA_COREQUISITE, (ArrayList<String>) corequisites);
                     startActivity(intent);
 
-                }
-                else {
+                } else {
                     Toast.makeText(getContext(), "ERROR: DOCUMENT_ID_NOT_RETRIEVED", Toast.LENGTH_SHORT).show();
                 }
             }

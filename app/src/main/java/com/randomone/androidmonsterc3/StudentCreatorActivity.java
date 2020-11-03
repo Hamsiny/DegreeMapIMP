@@ -149,6 +149,12 @@ public class StudentCreatorActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
     private void uploadImage() {
         Intent intent = getIntent();
         if (imageChanged == false) {        //todo make it so that images can be changed in an edit
