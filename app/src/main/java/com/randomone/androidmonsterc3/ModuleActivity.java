@@ -37,6 +37,7 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
         Intent intent = getIntent();
         managerMode = intent.getBooleanExtra(EXTRA_MANAGERMODE, false);
 
+
         if (managerMode == true) {
             setContentView(R.layout.activity_modules_manager);
         }
@@ -45,6 +46,7 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
         }
 
         fab = findViewById(R.id.fab);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);                   //replacing action bar with toolbar for navmenu
 

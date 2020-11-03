@@ -3,6 +3,7 @@
     package="com.randomone.androidmonsterc3">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
@@ -10,11 +11,13 @@
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".ModuleActivityStudents"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ManagerEntranceActivity" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".SplashScreenActivity"
-            android:theme="@style/SplahScreenTheme">
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,9 +30,9 @@
         <activity
             android:name=".StudentCreatorActivity"
             android:label="Create/Edit Student" />
-
         <activity
             android:name=".ModuleActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
+
 </manifest>
