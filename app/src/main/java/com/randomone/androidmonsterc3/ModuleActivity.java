@@ -89,12 +89,14 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
         efabStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fabHider();
                 newModule();
             }
         });
         efabModule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fabHider();
                 newStudent();
             }
         });
@@ -105,8 +107,19 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
 
     }
 
+    public void fabHider(){
+        if (isOpen == true) {
+            efabStudent.startAnimation(fabClose);
+            efabModule.startAnimation(fabClose);
+            efabStudent.setClickable(false);
+            efabModule.setClickable(false);
+            isOpen = false;
+        }
+    }
+
     @Override
     public void onBackPressed() {
+        fabHider();
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -116,6 +129,7 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        fabHider();
         switch (menuItem.getItemId()) {
             case R.id.nav_about:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
