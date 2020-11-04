@@ -36,6 +36,7 @@ public class ManagerEntranceActivity extends AppCompatActivity {
                 String passwordManagerInput = mEditTextPassword.getText().toString();
                 if (passwordManagerInput.equalsIgnoreCase(MANAGER_ENTRANCE_PASSWORD)){
                     Intent intent = new Intent(ManagerEntranceActivity.this, ModuleActivity.class);
+                    intent.putExtra(ModuleActivity.EXTRA_MANAGERMODE, true);
                     startActivity(intent);
                 }else{
                     Toast.makeText(ManagerEntranceActivity.this, "Wrong Password, please try again!", Toast.LENGTH_SHORT).show();
@@ -46,7 +47,7 @@ public class ManagerEntranceActivity extends AppCompatActivity {
         mTextViewStu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ManagerEntranceActivity.this, ModuleActivityStudents.class);
+                Intent intent = new Intent(ManagerEntranceActivity.this, ModuleActivity.class);
                 startActivity(intent);
             }
         });
