@@ -19,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String MANAGER_ENTRANCE_PASSWORD = "WinITDMP01";
+    public static final String MANAGER_ENTRANCE_PASSWORD = "WinITDMP01";
     final Context context = this;
     Dialog dialog;
     boolean isActivityRestarting;
@@ -31,12 +31,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        showDisclaimerPopup();
         mStudentEntrance = (Button) findViewById(R.id.button_entrance_student);
         mManagerEntrance = (Button) findViewById(R.id.button_entrance_manager);
 
-        showDisclaimerPopup();
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setLogo(R.drawable.androidmonsterlogo);
+//        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-        mManagerEntrance.setOnClickListener(new View.OnClickListener() {
+        /*mManagerEntrance.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 // get popup layout view
@@ -83,18 +87,29 @@ public class MainActivity extends AppCompatActivity {
                 // show it
                 alertDialog.show();
             }
-        });
+
+        });*/
+
 
         mStudentEntrance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(MainActivity.this, ModuleActivity.class);  //todo pass Manager boolean to ModuleActivity to decide if we should use manager or student XML
                 startActivity(intent);
             }
         });
 
-
+        mManagerEntrance.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ManagerEntranceActivity.class);
+                startActivity(intent);
+            }
+        }));
     }
+
+
 
     public void showDisclaimerPopup() {
         dialog = new Dialog(this);
@@ -109,4 +124,5 @@ public class MainActivity extends AppCompatActivity {
         });
         dialog.show();
     }
+
 }
