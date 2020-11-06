@@ -13,7 +13,7 @@ public class Student implements Parcelable {
     public String pathway;
 
     public Student() {
-        //Empty Constructor
+
     }
 
     public Student(String fName, String lName, Long studentID, String phone, String email, String photoURL, String pathway) {

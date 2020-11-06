@@ -34,6 +34,7 @@ import java.util.List;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class NetworkingFragment extends Fragment {
+
     FirestoreRecyclerOptions<Module> options;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -44,6 +45,7 @@ public class NetworkingFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private FirebaseFirestore mDatabaseRef;
     private ModuleAdapter adapter;
+    boolean managerMode;
 
 
     String[] semesterText = {
@@ -79,6 +81,9 @@ public class NetworkingFragment extends Fragment {
             }
         });
 
+        ModuleActivity activity = (ModuleActivity) getActivity();       //getting managerMode boolean
+        managerMode = activity.getManagerMode();
+
 
         mRecyclerView = rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -90,7 +95,7 @@ public class NetworkingFragment extends Fragment {
         adapter = new ModuleAdapter(options);
         mRecyclerView.setAdapter(adapter);
 
-        getActivity().setTitle("Networking Stream");
+        getActivity().setTitle("Network Stream");
 
         return rootView;
     }
@@ -168,7 +173,6 @@ public class NetworkingFragment extends Fragment {
                     editModule(position);
                     adapter.notifyDataSetChanged();
                 }
-
             }
 
             @Override
@@ -184,8 +188,13 @@ public class NetworkingFragment extends Fragment {
             }
         };
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
-        itemTouchHelper.attachToRecyclerView(mRecyclerView);
+        //if block removes the swipeability of non manager users
+        if (managerMode == true) {
+            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+            itemTouchHelper.attachToRecyclerView(mRecyclerView);
+        }
+
+
 
         //Recyclerview click listener
         adapter.setOnItemClickListener(new ModuleAdapter.OnItemClickListener() {
@@ -203,7 +212,7 @@ public class NetworkingFragment extends Fragment {
     }
 
     //method asks user for delete confirmation, and passes viewholder position to adapter if yes
-    private void deleteDialog(final int position){
+    private void deleteDialog(final int position) {
         new AlertDialog.Builder(getContext())
                 .setTitle("Delete Module?")
                 .setMessage("This will permanently remove this module from every device.")
@@ -226,7 +235,6 @@ public class NetworkingFragment extends Fragment {
 
     //creating a document snapshot with the provided reference ID, then getting the data to use in EXTRA's for activity intent.
     private void editModule(final int position) {
-
         //document reference
         final String id = adapter.getSnapshots().getSnapshot(position).getReference().getId();
 
@@ -235,7 +243,7 @@ public class NetworkingFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot moduleDoc = task.getResult();
-                if (moduleDoc.exists()){
+                if (moduleDoc.exists()) {
 
                     //savng snapshot data to extras
                     Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
@@ -268,8 +276,7 @@ public class NetworkingFragment extends Fragment {
                     intent.putStringArrayListExtra(ModuleCreatorActivity.EXTRA_COREQUISITE, (ArrayList<String>) corequisites);
                     startActivity(intent);
 
-                }
-                else {
+                } else {
                     Toast.makeText(getContext(), "ERROR: DOCUMENT_ID_NOT_RETRIEVED", Toast.LENGTH_SHORT).show();
                 }
             }

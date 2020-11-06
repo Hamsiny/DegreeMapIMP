@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -16,8 +17,22 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 public class StudentAdapter extends FirestoreRecyclerAdapter<Student, StudentAdapter.StudentViewholder>  {
 
 
-    public StudentAdapter(@NonNull FirestoreRecyclerOptions options) {
+    public StudentAdapter(@NonNull FirestoreRecyclerOptions<Student> options) {
         super(options);
+    }
+
+    @Override
+    protected void onBindViewHolder(@NonNull StudentViewholder holder, final int position, @NonNull Student model) {
+
+
+        holder.name.setText(model.getfName() + " " + model.getlName());
+        holder.email.setText(model.getEmail());
+        holder.phone.setText(model.getPhone());
+        holder.pathway.setText(model.getPathway());
+        holder.id.setText(String.valueOf(model.getStudentID()));
+        holder.image.setImageResource(R.drawable.ic_placeholder);
+        Glide.with(holder.itemView.getContext()).load(model.getPhotoURL()).centerCrop().into(holder.image);
+
     }
 
     @NonNull
@@ -28,16 +43,6 @@ public class StudentAdapter extends FirestoreRecyclerAdapter<Student, StudentAda
     }
 
 
-    private int expandedItemIndex = -1;
-    @Override
-    protected void onBindViewHolder(@NonNull StudentViewholder holder, int position, @NonNull Student model) {
-        holder.name.setText(model.getfName() + " " + model.getlName());
-        holder.email.setText(model.getEmail());
-        holder.phone.setText(model.getPhone());
-        holder.pathway.setText(model.getPathway());
-        holder.id.setText(String.valueOf(model.getStudentID()));
-        Glide.with(holder.itemView.getContext()).load(model.getPhotoURL()).centerCrop().into(holder.image);
-    }
 
     public class StudentViewholder extends RecyclerView.ViewHolder {
         TextView name, id, email, phone, pathway;
