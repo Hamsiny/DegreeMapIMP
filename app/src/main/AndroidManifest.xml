@@ -11,8 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ModuleActivityStudents"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".StudentProfileEdit"></activity>
+        <activity android:name=".StudentProfile" />
+        <activity
+            android:name=".ModuleActivityStudents"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ManagerEntranceActivity" />
         <activity android:name=".MainActivity" />
         <activity

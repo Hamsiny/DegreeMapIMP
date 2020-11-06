@@ -7,13 +7,16 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
 public class ModuleActivityStudents extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
+    private TextView studentName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,10 @@ public class ModuleActivityStudents extends AppCompatActivity implements Navigat
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        studentName = findViewById(R.id.student_name);
+
+
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_student,
                 new CoreFragment()).commit();
@@ -69,10 +76,12 @@ public class ModuleActivityStudents extends AppCompatActivity implements Navigat
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_student,
                         new WebFragment()).commit();
                 break;
-//            case R.id.nav_students:
+            case R.id.nav_student_profile:
 //                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_student,
 //                        new StudentFragment()).commit();
-//                break;
+                Intent intent = new Intent(ModuleActivityStudents.this, StudentProfile.class);
+                startActivity(intent);
+                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
