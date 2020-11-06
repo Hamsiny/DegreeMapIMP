@@ -4,11 +4,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import static com.randomone.androidmonsterc3.StudentProfileEdit.SHARED_PREFS;
 
 public class StudentProfile extends AppCompatActivity {
     private ImageView mStudentImage;
@@ -28,6 +31,21 @@ public class StudentProfile extends AppCompatActivity {
         mStudentPhone = (TextView) findViewById(R.id.student_profile_phone);
         mStudentPathway = (TextView) findViewById(R.id.student_profile_pathway);
         mStudentProfileEdit = (Button) findViewById(R.id.button_student_profile_edit);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        String studentfn = sharedPreferences.getString("studentfn", mStudentFirstname.getText().toString());
+        String studentln = sharedPreferences.getString("studentln", mStudentLastname.getText().toString());
+        String studentid = sharedPreferences.getString("studentid", mStudentID.getText().toString());
+        String studentem = sharedPreferences.getString("studentem", mStudentEmail.getText().toString());
+        String studentph = sharedPreferences.getString("studentph", mStudentPhone.getText().toString());
+        String studentphw = sharedPreferences.getString("studentphw", mStudentPathway.getText().toString());
+
+        mStudentFirstname.setText(studentfn);
+        mStudentLastname.setText(studentln);
+        mStudentID.setText(studentid);
+        mStudentEmail.setText(studentem);
+        mStudentPhone.setText(studentph);
+        mStudentPathway.setText(studentphw);
 
         mStudentProfileEdit.setOnClickListener(new View.OnClickListener() {
             @Override

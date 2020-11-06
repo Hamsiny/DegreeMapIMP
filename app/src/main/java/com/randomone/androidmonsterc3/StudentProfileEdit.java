@@ -3,6 +3,7 @@ package com.randomone.androidmonsterc3;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class StudentProfileEdit extends AppCompatActivity {
+    public static final String SHARED_PREFS = "sharedPrefs";
+
     private ImageView mStudentImage;
     private EditText mStudentFirstname, mStudentLastname, mStudentID, mStudentEmail, mStudentPhone;
     private Spinner mStudentPathway;
@@ -94,6 +97,17 @@ public class StudentProfileEdit extends AppCompatActivity {
                     editIntent.putExtra("EditEmail", editEmail);
                     editIntent.putExtra("EditPhone", editPhone);
                     editIntent.putExtra("EditPathway", editPathway);
+
+                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    editor.putString("studentfn", mStudentFirstname.getText().toString());
+                    editor.putString("studentln", mStudentLastname.getText().toString());
+                    editor.putString("studentid", mStudentID.getText().toString());
+                    editor.putString("studentem", mStudentEmail.getText().toString());
+                    editor.putString("studentph", mStudentPhone.getText().toString());
+                    editor.putString("studentphw", mStudentPathway.getSelectedItem().toString());
+                    editor.apply();
                     
                     setResult(RESULT_OK, editIntent);
                     Toast.makeText(StudentProfileEdit.this, "Student Profile Saved.", Toast.LENGTH_SHORT).show();
