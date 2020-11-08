@@ -35,61 +35,10 @@ public class MainActivity extends AppCompatActivity {
         mStudentEntrance = (Button) findViewById(R.id.button_entrance_student);
         mManagerEntrance = (Button) findViewById(R.id.button_entrance_manager);
 
+        //add logo on action bar
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
 //        getSupportActionBar().setLogo(R.drawable.androidmonsterlogo);
 //        getSupportActionBar().setDisplayUseLogoEnabled(true);
-
-        /*mManagerEntrance.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                // get popup layout view
-                LayoutInflater li = LayoutInflater.from(context);
-                View popupView = li.inflate(R.layout.manager_password_popup, null);
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        context);
-
-                // set popup layout to alertdialog builder
-                alertDialogBuilder.setView(popupView);
-
-                final EditText userInput = (EditText) popupView
-                        .findViewById(R.id.editTextDialogUserInput);
-
-                // set dialog message
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder
-                        .setCancelable(false)
-                        .setPositiveButton("OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        // get user input and check the password is right or not
-                                        String inputPass = userInput.getText().toString();
-                                        if (inputPass.equalsIgnoreCase(MANAGER_ENTRANCE_PASSWORD)) {
-                                            Intent intent = new Intent(MainActivity.this, ModuleActivity.class);
-                                            Boolean managerMode = true;
-                                            intent.putExtra(ModuleActivity.EXTRA_MANAGERMODE, managerMode);
-                                            startActivity(intent);
-                                        } else {
-                                            Toast.makeText(context, "Wrong password, please try again", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                }).create();
-
-
-
-                // show it
-                alertDialog.show();
-            }
-
-        });*/
-
 
         mStudentEntrance.setOnClickListener(new View.OnClickListener() {
             @Override

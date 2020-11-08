@@ -1,14 +1,17 @@
 package com.randomone.androidmonsterc3;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,6 +22,8 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import static com.randomone.androidmonsterc3.StudentProfileEdit.SHARED_PREFS;
+
 
 public class ModuleActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static final String EXTRA_MANAGERMODE = "com.randomone.androidmonsterc3.EXTRA_MANAGERMODE";
@@ -27,6 +32,10 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
     private FloatingActionButton fab;
     private ExtendedFloatingActionButton efabStudent, efabModule;
     private Animation fabOpen, fabClose;
+    private TextView mheaderStudentname;
+    private TextView mheaderStudentID;
+    String studentfn, studentln, studentid;
+
 
     public Boolean managerMode = false;
     Boolean isOpen = false;
@@ -45,6 +54,7 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
             setContentView(R.layout.activity_modules_student);
         }
 
+
         fab = findViewById(R.id.fab);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -53,6 +63,25 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);        //used to call the onNavigationItemSelected Method
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headView = navigationView.getHeaderView(0);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        studentfn = sharedPreferences.getString("studentfn", "Student");
+        studentln = sharedPreferences.getString("studentln", "name");
+        studentid = sharedPreferences.getString("studentid", "12344321");
+
+        mheaderStudentname = headView.findViewById(R.id.student_name);
+        mheaderStudentID = headView.findViewById(R.id.student_id);
+
+        if (managerMode == true){
+            mheaderStudentname.setText("Hami");
+            mheaderStudentID.setText("000000");
+        }else{
+            mheaderStudentname.setText(studentfn + " " + studentln);
+            mheaderStudentID.setText(studentid);
+        }
+
 
         efabStudent = findViewById(R.id.fab2);
         efabModule = findViewById(R.id.fab1);

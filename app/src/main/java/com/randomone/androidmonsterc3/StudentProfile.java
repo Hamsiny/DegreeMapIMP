@@ -1,5 +1,6 @@
 package com.randomone.androidmonsterc3;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,11 +12,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+
 import static com.randomone.androidmonsterc3.StudentProfileEdit.SHARED_PREFS;
 
 public class StudentProfile extends AppCompatActivity {
     private ImageView mStudentImage;
-    private TextView mStudentFirstname, mStudentLastname, mStudentID, mStudentEmail, mStudentPhone, mStudentPathway;
+    private TextView mStudentFirstname;
+    private TextView mStudentLastname;
+    private TextView mStudentID;
+    private TextView mStudentEmail;
+    private TextView mStudentPhone;
+    private TextView mStudentPathway;
     private Button mStudentProfileEdit;
 
     @Override
@@ -63,6 +74,20 @@ public class StudentProfile extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent();
+        String headerFirstname = mStudentFirstname.getText().toString();
+        String headerLastname = mStudentLastname.getText().toString();
+        String headerID = mStudentID.getText().toString();
+        intent.putExtra("headerFirstname", headerFirstname);
+        intent.putExtra("headerLastname", headerLastname);
+        intent.putExtra("headerID", headerID);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1){
@@ -83,4 +108,5 @@ public class StudentProfile extends AppCompatActivity {
             }
         }
     }
+
 }
