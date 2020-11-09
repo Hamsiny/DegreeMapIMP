@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -34,7 +36,8 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
     private Animation fabOpen, fabClose;
     private TextView mheaderStudentname;
     private TextView mheaderStudentID;
-    String studentfn, studentln, studentid;
+    private ImageView mheaderImage;
+    String studentfn, studentln, studentid, studentimage;
 
 
     public Boolean managerMode = false;
@@ -70,16 +73,25 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
         studentfn = sharedPreferences.getString("studentfn", "Student");
         studentln = sharedPreferences.getString("studentln", "name");
         studentid = sharedPreferences.getString("studentid", "12344321");
+        studentimage = sharedPreferences.getString("studentimg", "placeholder");
 
         mheaderStudentname = headView.findViewById(R.id.student_name);
         mheaderStudentID = headView.findViewById(R.id.student_id);
+        mheaderImage = headView.findViewById(R.id.student_image);
 
         if (managerMode == true){
             mheaderStudentname.setText("Hami");
-            mheaderStudentID.setText("000000");
+            mheaderStudentID.setText("00000000");
         }else{
             mheaderStudentname.setText(studentfn + " " + studentln);
             mheaderStudentID.setText(studentid);
+
+            if (studentimage == "placeholder"){
+                mheaderImage.setImageResource(R.drawable.ic_placeholder);
+            }
+            else {
+                Glide.with(getBaseContext()).load(studentimage).centerCrop().into(mheaderImage);
+            }
         }
 
 
