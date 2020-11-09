@@ -68,6 +68,8 @@ public class StudentProfile extends AppCompatActivity {
         mStudentPhone.setText(studentph);
         mStudentPathway.setText(studentphw);
 
+        Toast.makeText(this, deviceID, Toast.LENGTH_SHORT).show();
+
         if (internetCheck()) {       //if device has internet pull student from firestore
             DocumentReference documentReference = db.collection("students").document(deviceID);
             documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

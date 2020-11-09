@@ -8,11 +8,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import java.util.UUID;
 
+import static com.randomone.androidmonsterc3.StudentProfileEdit.SHARED_PREFS;
+
 public class SplashScreenActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 3000;
+    private static String uniqueID;
 
 
     @Override
@@ -21,6 +25,16 @@ public class SplashScreenActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
 
+        //setting device UUID
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        if(sharedPreferences.getBoolean("firstTime", true)) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            uniqueID = UUID.randomUUID().toString();
+            editor.putBoolean("firstTime", false);
+            editor.putString("deviceID", uniqueID);
+            editor.commit();
+        }
+        
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -30,15 +44,5 @@ public class SplashScreenActivity extends AppCompatActivity {
             }
         }, SPLASH_TIME_OUT);
 
-
-        //setting device UUID
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if(!prefs.getBoolean("firstTime", false)) {
-            SharedPreferences.Editor editor = prefs.edit();
-            String uniqueID = UUID.randomUUID().toString();
-            editor.putBoolean("firstTime", true);
-            editor.putString("deviceID", uniqueID);
-            editor.commit();
-        }
     }
 }
