@@ -145,6 +145,7 @@ public class StudentProfileEdit extends AppCompatActivity {
                     editIntent.putExtra("EditEmail", editEmail);
                     editIntent.putExtra("EditPhone", editPhone);
                     editIntent.putExtra("EditPathway", editPathway);
+                    editIntent.putExtra("EditImage",link);
 
                     SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
