@@ -155,6 +155,7 @@ public class StudentProfileEdit extends AppCompatActivity {
                     editor.putString("studentem", mStudentEmail.getText().toString());
                     editor.putString("studentph", mStudentPhone.getText().toString());
                     editor.putString("studentphw", mStudentPathway.getSelectedItem().toString());
+                    editor.putString("studentimg", link);
                     editor.apply();
 
 
