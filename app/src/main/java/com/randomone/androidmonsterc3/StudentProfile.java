@@ -68,8 +68,6 @@ public class StudentProfile extends AppCompatActivity {
         mStudentPhone.setText(studentph);
         mStudentPathway.setText(studentphw);
 
-        Toast.makeText(this, deviceID, Toast.LENGTH_SHORT).show();
-
         if (internetCheck()) {       //if device has internet pull student from firestore
             DocumentReference documentReference = db.collection("students").document(deviceID);
             documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -84,9 +82,21 @@ public class StudentProfile extends AppCompatActivity {
                         mStudentEmail.setText(studentProfile.getString("email"));
                         mStudentPhone.setText(studentProfile.getString("phone"));
                         mStudentPathway.setText(studentProfile.getString("pathway"));
+
+                        //updating shared prefs from firestore
+                        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                        editor.putString("studentfn", studentProfile.getString("fName"));
+                        editor.putString("studentln", studentProfile.getString("lName"));
+                        editor.putString("studentid", Long.toString(idLong));
+                        editor.putString("studentem", studentProfile.getString("email"));
+                        editor.putString("studentph", studentProfile.getString("fName"));
+                        editor.putString("studentphw",  studentProfile.getString("pathway"));
+                        editor.apply();
                     }
                     else {
-                        Toast.makeText(StudentProfile.this, "device id:" + deviceID, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StudentProfile.this, "Your profile is missing from the remote server! Please contact your tutor if you are still a current student.", Toast.LENGTH_LONG).show();
                     }
                 }
             });

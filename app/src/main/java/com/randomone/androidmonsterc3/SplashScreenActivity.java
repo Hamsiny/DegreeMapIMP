@@ -34,7 +34,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             editor.putString("deviceID", uniqueID);
             editor.commit();
         }
-        
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
