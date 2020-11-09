@@ -1,11 +1,18 @@
 package com.randomone.androidmonsterc3;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 
 import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +23,9 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapter.ModuleViewholder> {
+    private static final String TAG = "ModuleAdapter";
     private OnItemClickListener listener;
+//    private boolean isActive = false;
 
     public ModuleAdapter(@NonNull FirestoreRecyclerOptions<Module> options) {
         super(options);
@@ -30,6 +39,14 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
         holder.level.setText("Level " + model.getLevel());
         holder.credits.setText(model.getCredits() + " Credits");
 
+        boolean isActive = model.getisActive();
+        Log.d(TAG, "isActive: " + isActive);
+        if (isActive == false) {
+            holder.layouttest.setBackgroundColor(Color.parseColor("#f0f0f0")); //test colour please change
+        }
+
+
+
     }
 
     @NonNull
@@ -42,6 +59,9 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
     public class ModuleViewholder extends RecyclerView.ViewHolder {
 
         TextView name, code, description, level, credits;
+        RelativeLayout layouttest;
+        public CheckBox moduleComplete;
+        Boolean isActive, isFinished;
 
         public ModuleViewholder(@NonNull View view){
             super(view);
@@ -51,6 +71,10 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
             description = view.findViewById(R.id.module_description);
             level = view.findViewById(R.id.module_level);
             credits = view.findViewById(R.id.module_credits);
+            layouttest = view.findViewById(R.id.module_background);
+
+            moduleComplete = (CheckBox) view.findViewById(R.id.module_complete);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

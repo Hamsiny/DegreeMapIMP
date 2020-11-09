@@ -233,7 +233,9 @@ public class ModuleCreatorActivity extends AppCompatActivity {
                 Integer.parseInt(levelInput.getText().toString()),
                 pathway,
                 prerequisites,
-                corequisites);
+                corequisites,
+                false,
+                true);
 
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_ID)) {
