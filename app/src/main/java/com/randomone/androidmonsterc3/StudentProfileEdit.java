@@ -78,6 +78,9 @@ public class StudentProfileEdit extends AppCompatActivity {
         String Email = intent.getStringExtra("Email");
         String Phone = intent.getStringExtra("Phone");
         String Pathway = intent.getStringExtra("Pathway");
+        link = intent.getStringExtra("imageurl");
+
+        Glide.with(getBaseContext()).load(link).centerCrop().into(mStudentImage);
 
         mStudentFirstname.setText(FirstName);
         mStudentLastname.setText(LastName);
@@ -106,7 +109,6 @@ public class StudentProfileEdit extends AppCompatActivity {
         mUploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageChanged = true;
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -117,12 +119,18 @@ public class StudentProfileEdit extends AppCompatActivity {
         mSaveProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (mStudentFirstname.getText().toString().isEmpty() || mStudentLastname.getText().toString().isEmpty() ||
                         mStudentID.getText().toString().isEmpty() || mStudentEmail.getText().toString().isEmpty() ||
-                        mStudentPhone.getText().toString().isEmpty()){
+                        mStudentPhone.getText().toString().isEmpty()) {
                     Toast.makeText(StudentProfileEdit.this, "One or many fields are empty.", Toast.LENGTH_SHORT).show();
                     return;
-                }else{
+                }
+                if (imageChanged == false && link == "placeholder") {
+                    Toast.makeText(StudentProfileEdit.this, "You must add a profile image.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else {
                     String editFirstName = mStudentFirstname.getText().toString();
                     String editLastName = mStudentLastname.getText().toString();
                     String editStudentID = mStudentID.getText().toString();
@@ -149,7 +157,7 @@ public class StudentProfileEdit extends AppCompatActivity {
                     editor.putString("studentphw", mStudentPathway.getSelectedItem().toString());
                     editor.apply();
 
-                    link = mImageUri.toString();
+
                     imageUpload();
                     setResult(RESULT_OK, editIntent);
                     Toast.makeText(StudentProfileEdit.this, "Student Profile Saved.", Toast.LENGTH_SHORT).show();
@@ -167,6 +175,10 @@ public class StudentProfileEdit extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
             mImageUri = data.getData();
+            if (mImageUri != null) {
+                link = mImageUri.toString();
+                imageChanged = true;
+            }
             Glide.with(this).load(mImageUri).centerCrop().into(mStudentImage);
         }
     }

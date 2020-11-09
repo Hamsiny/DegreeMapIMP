@@ -63,7 +63,7 @@ public class StudentProfile extends AppCompatActivity {
         String studentem = sharedPreferences.getString("studentem", mStudentEmail.getText().toString());
         String studentph = sharedPreferences.getString("studentph", mStudentPhone.getText().toString());
         String studentphw = sharedPreferences.getString("studentphw", mStudentPathway.getText().toString());
-        String studentimg = sharedPreferences.getString("studentimg", "placeholder");
+        final String studentimg = sharedPreferences.getString("studentimg", "placeholder");
 
         final String deviceID = sharedPreferences.getString("deviceID", null);
 
@@ -132,6 +132,9 @@ public class StudentProfile extends AppCompatActivity {
                 intent.putExtra("Email", mStudentEmail.getText().toString());
                 intent.putExtra("Phone", mStudentPhone.getText().toString());
                 intent.putExtra("Pathway", mStudentPathway.getText().toString());
+                if (studentimg != "placeholder") {
+                    intent.putExtra("imageurl", studentimg);
+                }
                 startActivityForResult(intent, 1);
             }
         });
