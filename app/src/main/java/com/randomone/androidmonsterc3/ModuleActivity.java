@@ -2,6 +2,7 @@ package com.randomone.androidmonsterc3;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -189,6 +190,10 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
             case R.id.nav_student_profile:
                 Intent intent = new Intent(ModuleActivity.this, StudentProfile.class);
                 startActivity(intent);
+                break;
+            case R.id.nav_wintec_module:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.wintec.ac.nz/study-at-wintec"));
+                startActivity(browserIntent);
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);

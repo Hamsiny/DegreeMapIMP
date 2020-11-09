@@ -32,6 +32,7 @@ public class Module implements Parcelable {
         this.Pathway = pathway;
         this.Prerequisites = prerequisites;
         this.Corequisite = corequisite;
+
     }
 
     protected Module(Parcel in) {
@@ -129,6 +130,7 @@ public class Module implements Parcelable {
     public void setCorequisite(List<String> corequisite) {
         this.Corequisite = corequisite;
     }
+
 
     @Override
     public int describeContents() {
