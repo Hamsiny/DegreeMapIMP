@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,11 +18,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.io.File;
 
 import static com.randomone.androidmonsterc3.StudentProfileEdit.SHARED_PREFS;
 
@@ -34,6 +38,7 @@ public class StudentProfile extends AppCompatActivity {
     private TextView mStudentPhone;
     private TextView mStudentPathway;
     private Button mStudentProfileEdit;
+    private Uri imageLink;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -58,6 +63,7 @@ public class StudentProfile extends AppCompatActivity {
         String studentem = sharedPreferences.getString("studentem", mStudentEmail.getText().toString());
         String studentph = sharedPreferences.getString("studentph", mStudentPhone.getText().toString());
         String studentphw = sharedPreferences.getString("studentphw", mStudentPathway.getText().toString());
+        String studentimg = sharedPreferences.getString("studentimg", "placeholder");
 
         final String deviceID = sharedPreferences.getString("deviceID", null);
 
@@ -68,8 +74,16 @@ public class StudentProfile extends AppCompatActivity {
         mStudentPhone.setText(studentph);
         mStudentPathway.setText(studentphw);
 
+        if (studentimg == "placeholder"){
+            mStudentImage.setImageResource(R.drawable.ic_placeholder);
+        }
+        else {
+            Glide.with(getBaseContext()).load(studentimg).centerCrop().into(mStudentImage);
+        }
+
+
         if (internetCheck()) {       //if device has internet pull student from firestore
-            DocumentReference documentReference = db.collection("students").document(deviceID);
+            final DocumentReference documentReference = db.collection("students").document(deviceID);
             documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -83,6 +97,9 @@ public class StudentProfile extends AppCompatActivity {
                         mStudentPhone.setText(studentProfile.getString("phone"));
                         mStudentPathway.setText(studentProfile.getString("pathway"));
 
+                        String imageLink = studentProfile.getString("photoURL");        //setting image URI to the one in sharedprefs
+                        Glide.with(getBaseContext()).load(imageLink).centerCrop().into(mStudentImage);
+
                         //updating shared prefs from firestore
                         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -93,6 +110,7 @@ public class StudentProfile extends AppCompatActivity {
                         editor.putString("studentem", studentProfile.getString("email"));
                         editor.putString("studentph", studentProfile.getString("fName"));
                         editor.putString("studentphw",  studentProfile.getString("pathway"));
+                        //todo save image from firebase to local and set as shared pref
                         editor.apply();
                     }
                     else {
