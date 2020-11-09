@@ -38,7 +38,7 @@ public class StudentProfile extends AppCompatActivity {
     private TextView mStudentPhone;
     private TextView mStudentPathway;
     private Button mStudentProfileEdit;
-    String studentimg, imageURL;
+    String studentimg, studentfn, studentln, studentid, studentem, studentph, studentphw;
     Boolean edited = false;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -58,14 +58,14 @@ public class StudentProfile extends AppCompatActivity {
         mStudentProfileEdit = (Button) findViewById(R.id.button_student_profile_edit);
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        String studentfn = sharedPreferences.getString("studentfn", mStudentFirstname.getText().toString());
-        String studentln = sharedPreferences.getString("studentln", mStudentLastname.getText().toString());
-        String studentid = sharedPreferences.getString("studentid", mStudentID.getText().toString());
-        String studentem = sharedPreferences.getString("studentem", mStudentEmail.getText().toString());
-        String studentph = sharedPreferences.getString("studentph", mStudentPhone.getText().toString());
-        String studentphw = sharedPreferences.getString("studentphw", mStudentPathway.getText().toString());
+        studentfn = sharedPreferences.getString("studentfn", mStudentFirstname.getText().toString());
+        studentln = sharedPreferences.getString("studentln", mStudentLastname.getText().toString());
+        studentid = sharedPreferences.getString("studentid", mStudentID.getText().toString());
+        studentem = sharedPreferences.getString("studentem", mStudentEmail.getText().toString());
+        studentph = sharedPreferences.getString("studentph", mStudentPhone.getText().toString());
+        studentphw = sharedPreferences.getString("studentphw", mStudentPathway.getText().toString());
         studentimg = sharedPreferences.getString("studentimg", "placeholder");
-
+        
         final String deviceID = sharedPreferences.getString("deviceID", null);
 
         mStudentFirstname.setText(studentfn);
@@ -102,7 +102,7 @@ public class StudentProfile extends AppCompatActivity {
                         Glide.with(getBaseContext()).load(imageLink).centerCrop().into(mStudentImage);
 
                         //updating shared prefs from firestore
-                        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                   /*     SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
 
                         editor.putString("studentfn", studentProfile.getString("fName"));
@@ -112,7 +112,7 @@ public class StudentProfile extends AppCompatActivity {
                         editor.putString("studentph", studentProfile.getString("fName"));
                         editor.putString("studentphw",  studentProfile.getString("pathway"));
                         //todo save image from firebase to local and set as shared pref
-                        editor.apply();
+                        editor.apply();*/
                     }
                     else {
                         Toast.makeText(StudentProfile.this, "Your profile is missing from the remote server! Please contact your tutor if you are still a current student.", Toast.LENGTH_LONG).show();
@@ -133,10 +133,8 @@ public class StudentProfile extends AppCompatActivity {
                 intent.putExtra("Email", mStudentEmail.getText().toString());
                 intent.putExtra("Phone", mStudentPhone.getText().toString());
                 intent.putExtra("Pathway", mStudentPathway.getText().toString());
-                if (edited = true) {
-                    intent.putExtra("imageurl", imageURL);
-                }
-                else if (studentimg != "placeholder") {
+
+                if (studentimg != "placeholder") {
                     intent.putExtra("imageurl", studentimg);
                 }
                 startActivityForResult(intent, 1);
@@ -170,7 +168,7 @@ public class StudentProfile extends AppCompatActivity {
                 String Email = data.getStringExtra("EditEmail");
                 String Phone = data.getStringExtra("EditPhone");
                 String Pathway = data.getStringExtra("EditPathway");
-                imageURL = data.getStringExtra("EditImage");
+                studentimg = data.getStringExtra("EditImage");
 
                 mStudentFirstname.setText(FirstName);
                 mStudentLastname.setText(LastName);
@@ -178,7 +176,7 @@ public class StudentProfile extends AppCompatActivity {
                 mStudentEmail.setText(Email);
                 mStudentPhone.setText(Phone);
                 mStudentPathway.setText(Pathway);
-                Glide.with(getBaseContext()).load(imageURL).centerCrop().into(mStudentImage);
+                Glide.with(getBaseContext()).load(studentimg).centerCrop().into(mStudentImage);
 
             }
         }

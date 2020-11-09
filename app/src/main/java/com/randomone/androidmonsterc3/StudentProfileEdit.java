@@ -147,20 +147,11 @@ public class StudentProfileEdit extends AppCompatActivity {
                     editIntent.putExtra("EditPathway", editPathway);
                     editIntent.putExtra("EditImage",link);
 
-                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                    editor.putString("studentfn", mStudentFirstname.getText().toString());
-                    editor.putString("studentln", mStudentLastname.getText().toString());
-                    editor.putString("studentid", mStudentID.getText().toString());
-                    editor.putString("studentem", mStudentEmail.getText().toString());
-                    editor.putString("studentph", mStudentPhone.getText().toString());
-                    editor.putString("studentphw", mStudentPathway.getSelectedItem().toString());
-                    editor.putString("studentimg", link);
-                    editor.apply();
-
 
                     imageUpload();
+
+
+
                     setResult(RESULT_OK, editIntent);
                     Toast.makeText(StudentProfileEdit.this, "Student Profile Saved.", Toast.LENGTH_SHORT).show();
                     finish();
@@ -215,6 +206,19 @@ public class StudentProfileEdit extends AppCompatActivity {
     }
 
     public void createStudent(String link) {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("studentfn", mStudentFirstname.getText().toString());
+        editor.putString("studentln", mStudentLastname.getText().toString());
+        editor.putString("studentid", mStudentID.getText().toString());
+        editor.putString("studentem", mStudentEmail.getText().toString());
+        editor.putString("studentph", mStudentPhone.getText().toString());
+        editor.putString("studentphw", mStudentPathway.getSelectedItem().toString());
+        editor.putString("studentimg", link);
+        editor.apply();
+
+
         Student student = new Student(
                 mStudentFirstname.getText().toString(),
                 mStudentLastname.getText().toString(),
