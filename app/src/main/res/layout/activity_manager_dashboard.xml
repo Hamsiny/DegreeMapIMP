@@ -1,9 +1,411 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ManagerDashboard">
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/containerD"
+        android:padding="4dp">
+        <com.google.android.material.card.MaterialCardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/StudentsCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:checkable="true"
+            android:clickable="true"
+            app:cardCornerRadius="16dp"
+            app:strokeColor="@color/wintecYellow"
+            app:strokeWidth="3dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/wintecYellow"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/card_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="50dp"
+                        android:autoSizeTextType="uniform"
+                        android:maxLines="1"
+                        android:text="Students"
+                        android:textColor="@color/wintecDarkGrey" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/txtTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Students : "
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txtSE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtTotal"
+                        android:text="Software Engineering (SE) : "
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txtNE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtSE"
+                        android:text="Network Engineering (NE) : "
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txtDB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtNE"
+                        android:text="Database Architecture (DB) : "
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txtWD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtDB"
+                        android:text="Multimedia Web Development (WD) : "
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txtNone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtWD"
+                        android:text="Undecided : "
+                        android:textSize="14sp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ModulesCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:checkable="true"
+            android:clickable="true"
+            app:cardCornerRadius="16dp"
+            app:strokeColor="@color/wintecYellow"
+            app:strokeWidth="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/wintecYellow"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/card_title_modules"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="50dp"
+                        android:autoSizeTextType="uniform"
+                        android:maxLines="1"
+                        android:text="Modules"
+                        android:textColor="@color/wintecDarkGrey" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/txtModuleTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Modules : "
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txtStreams"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtModuleTotal"
+                        android:text="Streams : "
+                        android:textSize="14sp" />
+
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/SECard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:checkable="true"
+            android:clickable="true"
+            app:cardCornerRadius="16dp"
+            app:strokeColor="@color/wintecYellow"
+            app:strokeWidth="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/wintecYellow"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/card_title_SE"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="50dp"
+                        android:autoSizeTextType="uniform"
+                        android:maxLines="1"
+                        android:text="Software Engineering (SE)"
+                        android:textColor="@color/wintecDarkGrey" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/txtModuleTotalSE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total SE Modules : "
+                        android:textSize="14sp" />
+
+
+
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/NECard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:checkable="true"
+            android:clickable="true"
+            app:cardCornerRadius="16dp"
+            app:strokeColor="@color/wintecYellow"
+            app:strokeWidth="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/wintecYellow"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/card_title_NE"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="50dp"
+                        android:autoSizeTextType="uniform"
+                        android:maxLines="1"
+                        android:text="Network Engineering (NE)"
+                        android:textColor="@color/wintecDarkGrey" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/txtModuleTotalNE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total NE Modules : "
+                        android:textSize="14sp" />
+
+
+
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/DBCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:checkable="true"
+            android:clickable="true"
+            app:cardCornerRadius="16dp"
+            app:strokeColor="@color/wintecYellow"
+            app:strokeWidth="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/wintecYellow"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/card_title_DB"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="50dp"
+                        android:autoSizeTextType="uniform"
+                        android:maxLines="1"
+                        android:text="Database Architecture (DB)"
+                        android:textColor="@color/wintecDarkGrey" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/txtModuleTotalDB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total DB Modules : "
+                        android:textSize="14sp" />
+
+
+
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/WDCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:checkable="true"
+            android:clickable="true"
+            app:cardCornerRadius="16dp"
+            app:strokeColor="@color/wintecYellow"
+            app:strokeWidth="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/wintecYellow"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/card_title_WD"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="50dp"
+                        android:autoSizeTextType="uniform"
+                        android:maxLines="1"
+                        android:text="Multimedia Web Development (WD)"
+                        android:textColor="@color/wintecDarkGrey" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/txtModuleTotalWD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total WD Modules : "
+                        android:textSize="14sp" />
+
+
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </LinearLayout>
+</ScrollView>
+
+
+
