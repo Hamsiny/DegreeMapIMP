@@ -29,6 +29,9 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_dashboard"
+            android:title="Dashboard" />
+        <item
             android:id="@+id/nav_about"
             android:title="About" />
 

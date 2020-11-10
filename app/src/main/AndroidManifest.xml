@@ -33,6 +33,9 @@
         <activity
             android:name=".ModuleActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ManagerDashboard"
+            android:label="ManagerDashboard" />
     </application>
 
 </manifest>
