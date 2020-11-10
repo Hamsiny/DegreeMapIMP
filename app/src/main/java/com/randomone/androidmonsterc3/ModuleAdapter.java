@@ -25,7 +25,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapter.ModuleViewholder> {
     private static final String TAG = "ModuleAdapter";
     private OnItemClickListener listener;
-//    private boolean isActive = false;
+    private boolean isFinished;
 
     public ModuleAdapter(@NonNull FirestoreRecyclerOptions<Module> options) {
         super(options);
@@ -44,8 +44,9 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
         if (isActive == false) {
             holder.layouttest.setBackgroundColor(Color.parseColor("#f0f0f0")); //test colour please change
         }
-
-
+        else {
+            holder.layouttest.setBackgroundColor(Color.parseColor("#ffdd00")); //test colour please change
+        }
 
     }
 
@@ -75,6 +76,12 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
 
             moduleComplete = (CheckBox) view.findViewById(R.id.module_complete);
 
+            moduleComplete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                }
+            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
