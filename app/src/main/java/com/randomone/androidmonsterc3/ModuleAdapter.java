@@ -1,11 +1,17 @@
 package com.randomone.androidmonsterc3;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 
 import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,8 +21,18 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.randomone.androidmonsterc3.StudentProfileEdit.SHARED_PREFS;
+
 public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapter.ModuleViewholder> {
     private OnItemClickListener listener;
+    private static final String TAG = "ModuleAdapter";
+    SharedPreferences sharedPreferences;
+
+
 
     public ModuleAdapter(@NonNull FirestoreRecyclerOptions<Module> options) {
         super(options);
@@ -30,6 +46,20 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
         holder.level.setText("Level " + model.getLevel());
         holder.credits.setText(model.getCredits() + " Credits");
 
+        String id = getSnapshots().getSnapshot(position).getId();
+        sharedPreferences = holder.itemView.getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        Set<String> completedModules = new HashSet<String>(sharedPreferences.getStringSet("completedModules", new HashSet<String>()));
+
+
+
+        if (completedModules.contains(model.getCode())){
+            holder.moduleCheckbox.setChecked(true);
+        }
+        else {
+            holder.moduleCheckbox.setChecked(false);
+        }
+
+
     }
 
     @NonNull
@@ -42,6 +72,7 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
     public class ModuleViewholder extends RecyclerView.ViewHolder {
 
         TextView name, code, description, level, credits;
+        CheckBox moduleCheckbox;
 
         public ModuleViewholder(@NonNull View view){
             super(view);
@@ -51,6 +82,31 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
             description = view.findViewById(R.id.module_description);
             level = view.findViewById(R.id.module_level);
             credits = view.findViewById(R.id.module_credits);
+
+            moduleCheckbox = view.findViewById(R.id.module_complete);
+
+            moduleCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    int pos = getAdapterPosition();
+                    String code = getItem(pos).getCode();
+
+                    Toast.makeText(buttonView.getContext(), code, Toast.LENGTH_SHORT).show();
+                    sharedPreferences = buttonView.getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                    Set<String> completedModules = new HashSet<String>(sharedPreferences.getStringSet("completedModules", new HashSet<String>()));
+                    if (isChecked == true) {
+                        completedModules.add(code);
+                    }
+                    else {
+                        completedModules.remove(code);
+                    }
+                    sharedPreferences.edit().putStringSet("completedModules", completedModules).apply();
+
+
+                }
+            });
+
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
