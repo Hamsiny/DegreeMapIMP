@@ -2,6 +2,7 @@ package com.randomone.androidmonsterc3;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,9 +21,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -31,6 +35,7 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
     private OnItemClickListener listener;
     private static final String TAG = "ModuleAdapter";
     SharedPreferences sharedPreferences;
+    Boolean unlocked = true;
 
 
 
@@ -39,7 +44,7 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ModuleAdapter.ModuleViewholder holder, final int position, @NonNull Module model) {
+    protected void onBindViewHolder(@NonNull final ModuleAdapter.ModuleViewholder holder, final int position, @NonNull final Module model) {
         holder.code.setText(model.getCode());
         holder.name.setText(model.getTitle());
         holder.description.setText(model.getDescription());
@@ -50,6 +55,35 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
         sharedPreferences = holder.itemView.getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         Set<String> completedModules = new HashSet<String>(sharedPreferences.getStringSet("completedModules", new HashSet<String>()));
 
+        List<String> prerequisites = model.getPrerequisites();
+
+
+        if (prerequisites != null && !prerequisites.isEmpty()) {
+            final String requirements = String.join(", ", prerequisites);
+            for (String element : prerequisites) {
+                if (completedModules.contains(element)){
+                    unlocked = true;
+                }
+                else {
+                    unlocked = false;
+                    holder.moduleCheckbox.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            holder.moduleCheckbox.setChecked(false);
+                            Toast.makeText(v.getContext(), "You must complete the following classes first: " + requirements, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    holder.strokeColour.setStrokeColor(Color.parseColor("#f0f0f0"));
+                    holder.backgroundColour.setBackgroundColor(Color.parseColor("#f0f0f0"));
+                    break;
+                }
+            }
+        }
+        else {
+            holder.strokeColour.setStrokeColor(Color.parseColor("#ffdd00"));
+            holder.backgroundColour.setBackgroundColor(Color.parseColor("#ffdd00"));
+        }
 
 
         if (completedModules.contains(model.getCode())){
@@ -58,6 +92,8 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
         else {
             holder.moduleCheckbox.setChecked(false);
         }
+
+
 
 
     }
@@ -73,6 +109,8 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
 
         TextView name, code, description, level, credits;
         CheckBox moduleCheckbox;
+        MaterialCardView strokeColour;
+        RelativeLayout backgroundColour;
 
         public ModuleViewholder(@NonNull View view){
             super(view);
@@ -84,6 +122,8 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
             credits = view.findViewById(R.id.module_credits);
 
             moduleCheckbox = view.findViewById(R.id.module_complete);
+            backgroundColour = view.findViewById(R.id.card_background);
+            strokeColour = view.findViewById(R.id.card_stroke);
 
             moduleCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -91,7 +131,6 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
                     int pos = getAdapterPosition();
                     String code = getItem(pos).getCode();
 
-                    Toast.makeText(buttonView.getContext(), code, Toast.LENGTH_SHORT).show();
                     sharedPreferences = buttonView.getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
                     Set<String> completedModules = new HashSet<String>(sharedPreferences.getStringSet("completedModules", new HashSet<String>()));
                     if (isChecked == true) {
