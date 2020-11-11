@@ -17,12 +17,14 @@ public class Module implements Parcelable {
     private List<String> Pathway;
     private List<String> Prerequisites;
     private List<String> Corequisite;
+    private boolean isFinished;
+    private boolean isActive;
 
     public Module(){
 
     }
 
-    public Module(String code, String title, String description, String time, int credits, int level, List<String> pathway, List<String> prerequisites, List<String> corequisite) {
+    public Module(String code, String title, String description, String time, int credits, int level, List<String> pathway, List<String> prerequisites, List<String> corequisite, boolean isFinished, boolean isActive) {
         this.Code = code;
         this.Title = title;
         this.Description = description;
@@ -32,6 +34,8 @@ public class Module implements Parcelable {
         this.Pathway = pathway;
         this.Prerequisites = prerequisites;
         this.Corequisite = corequisite;
+        this.isFinished = isFinished;
+        this.isActive = isActive;
 
     }
 
@@ -131,6 +135,22 @@ public class Module implements Parcelable {
         this.Corequisite = corequisite;
     }
 
+    public boolean getFinished() {
+        return isFinished;
+    }
+
+    public void setFinished(boolean finished) {
+        isFinished = finished;
+    }
+
+    public boolean getisActive() {
+        return isActive;
+    }
+
+
+    public void setisActive(boolean active) {
+        isActive = active;
+    }
 
     @Override
     public int describeContents() {

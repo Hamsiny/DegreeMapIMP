@@ -38,7 +38,7 @@
             android:title="About" />
         <item
             android:id="@+id/nav_wintec_module"
-            android:title="Wintec" />
+            android:title="Visit Wintec" />
 
         <!--        <item-->
         <!--            android:id="@+id/nav_students"-->
