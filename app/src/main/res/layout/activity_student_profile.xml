@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="Mary"
+                android:hint="Your First Name(s)"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -70,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="Donald"
+                android:hint="Your Last Name(s)"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -100,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="12345678"
+                android:hint="Your 8 Digit ID"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -122,7 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="123456789@gmail.com"
+                android:hint="Wintec or personal email"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -144,7 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="01234567890"
+                android:hint="Mobile Phone Number"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -166,7 +166,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="Software Engineering"
+                android:hint="Select Pathway"
                 android:textSize="20sp" />
         </LinearLayout>
 
