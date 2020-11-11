@@ -33,13 +33,15 @@
                 android:autoSizeTextType="uniform"
                 android:maxLines="1"
                 android:text="Test module Brown Cow"
-                android:textColor="@color/wintecDarkGrey" />
+                android:textColor="@color/wintecDarkGrey"
+                android:layout_centerVertical="true"/>
 
             <CheckBox
                 android:id="@+id/module_complete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"/>
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/wintecDarkGrey"/>
 
         </RelativeLayout>
 

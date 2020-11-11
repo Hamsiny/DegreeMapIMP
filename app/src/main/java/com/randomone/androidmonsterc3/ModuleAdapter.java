@@ -83,6 +83,12 @@ public class ModuleAdapter extends FirestoreRecyclerAdapter<Module, ModuleAdapte
         else {
             holder.strokeColour.setStrokeColor(Color.parseColor("#ffdd00"));
             holder.backgroundColour.setBackgroundColor(Color.parseColor("#ffdd00"));
+            holder.moduleCheckbox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    notifyDataSetChanged();
+                }
+            });
         }
 
 
