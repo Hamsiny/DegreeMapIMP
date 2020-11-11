@@ -93,7 +93,7 @@ public class ManagerDashboard extends AppCompatActivity {
             }
         });
 
-
+        getSupportActionBar().setTitle("Dashboard");
 
 
 
