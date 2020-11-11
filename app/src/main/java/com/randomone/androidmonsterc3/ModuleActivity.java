@@ -204,7 +204,7 @@ public class ModuleActivity extends AppCompatActivity implements NavigationView.
                 startActivity(intent);
                 break;
             case R.id.nav_wintec_module:
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.wintec.ac.nz/study-at-wintec"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.wintec.ac.nz/study-at-wintec/courses/information-technology/bachelor-of-applied-information-technology"));
                 startActivity(browserIntent);
                 break;
             case R.id.nav_dashboard:

@@ -48,6 +48,8 @@ public class StudentProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_profile);
 
+        getSupportActionBar().setTitle("Student Profile");
+
         mStudentImage = (ImageView) findViewById(R.id.student_profile_image);
         mStudentFirstname = (TextView) findViewById(R.id.student_profile_firstname);
         mStudentLastname = (TextView) findViewById(R.id.student_profile_lastname);
