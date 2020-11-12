@@ -84,16 +84,73 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/os_name"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="142dp"
+        android:layout_marginTop="20dp"
         android:text="Developed By:"
         android:textSize="24sp" />
 
     <ImageView
+        android:id="@+id/developer_logo"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_below="@id/developer_title"
         android:layout_marginTop="8dp"
         android:src="@drawable/monster_logo" />
+
+
+    <TextView
+        android:id="@+id/oli"
+        android:layout_below="@id/developer_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="Olivia Mcleod"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/sug"
+        android:layout_below="@id/oli"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Suganya Nalla Thambi"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/jan"
+        android:layout_below="@id/sug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Jankiben Ramkrishna Rawal"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/kas"
+        android:layout_below="@id/jan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Kasun Ramanayake"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/may"
+        android:layout_below="@id/kas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Mayank Sharma"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/hon"
+        android:layout_below="@id/may"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Hongpeng Qu"
+        android:textSize="16sp"/>
 
 
 </RelativeLayout>
