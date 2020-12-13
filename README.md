@@ -1,2 +1,2 @@
 # AndroidMonsterC3
-This is our group repository, we can edit our android project here. 
+Its a degree map app which shows students and courses with different pathway and different semester in recycler view. 
